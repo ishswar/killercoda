@@ -8,19 +8,17 @@
     },
     "steps": [
       {
-        "title": "Create an empty file",
-        "text": "step1/text.md",
-        "verify": "step1/verify.sh"
+        "title": "Deploy app using kubernetes manifest files",
+        "text": "step1/text.md"
+
       },
       {
-        "title": "Create a file with text",
-        "text": "step2/text.md",
-        "verify": "step2/verify.sh"
+        "title": "Create Helm Charts and deploy using Helm charts",
+        "text": "step2/text.md"
       },
       {
-        "title": "Delete a file",
-        "text": "step3/text.md",
-        "verify": "step3/verify.sh"
+        "title": "Add Helmfile in mid and Deploy using Helmfile tool",
+        "text": "step3/text.md"
       }
     ],
     "finish": {
@@ -28,6 +26,6 @@
     }
   },
   "backend": {
-    "imageid": "kubernetes-kubeadm-1node"
+    "imageid": "kubernetes-kubeadm-2nodes"
   }
 }
