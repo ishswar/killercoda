@@ -90,7 +90,7 @@ result       NodePort    10.97.138.2      <none>        5001:31001/TCP   2m28s
 vote         NodePort    10.96.230.143    <none>        5000:31000/TCP   2m28s
 ```
 
-You should be able to access voting GUI via URL [ACCESS VOTE APP]({{TRAFFIC_HOST1_31000}})- it will look like this : 
+You should be able to access voting GUI via URL [ACCESS VOTE APP]({{TRAFFIC_HOST1_31000}}) - it will look like this : 
 
 
 ![](https://i.ibb.co/s5QMMtM/image.png)
