@@ -1,6 +1,8 @@
 
 Check out Git Repo and Deploy
 
+_In this step we are not dot using Helm yet - we are just using Kubernetes yaml/manifest file to deploy applications to understand how all it works_
+
 <br>
 
 # Deploying using yaml/manifest files 
@@ -12,17 +14,18 @@ Clone my github repo :
 These has all the code we will use during this demo 
 
 Change into to directory k8s-specifications `cd example-voting-app/k8s-specifications/`{{exec}}
-These have YAML files to deploy 
+These have all YAML files for deployment
 
 1. Voting app - web app once vote received (via browser) - they are saved into Redis
-1. Redis server
-1. .NET code that scans Redis server and inserts votes into Database 
-2. Database to store Votes   
-3. Result app that shows votes via reading Database 
+2. Redis server
+3. .NET code that scans Redis server and inserts votes into Database 
+4. Database to store Votes   
+5. Result app that shows votes via reading Database 
 
-There are five apps above - which means we should have 5 Kubernetes deployment files - that is what you will find in `k8s-specifications` 
+There are five apps above - which means we should have 5 Kubernetes deployment files - that is what you will find in `k8s-specifications` folder
+
 Now we also need a stable end-point to access apps above. 
-The votting app and result app are exposed outside the cluster via NodePort and DB and Redis are exposed internally using ClusterIP.
+The voting app and result app are exposed outside the cluster via NodePort and DB and Redis are exposed internally using ClusterIP.
 
 `tree ~/example-voting-app/k8s-specifications/`{{exec}}
 
@@ -87,13 +90,12 @@ result       NodePort    10.97.138.2      <none>        5001:31001/TCP   2m28s
 vote         NodePort    10.96.230.143    <none>        5000:31000/TCP   2m28s
 ```
 
-You should be able to access voting GUI via URL like http://(node-ip):31000 - it will look like this : 
+You should be able to access voting GUI via URL [ACCESS VOTE APP]({{TRAFFIC_HOST1_31000}})- it will look like this : 
 
-[ACCESS VOTE APP]({{TRAFFIC_HOST1_31000}})
 
 ![](https://i.ibb.co/s5QMMtM/image.png)
 
-Submit your vote and now you can access result page via URL like: http://(node-ip):31001 - it might look like this : 
+Submit your vote and now you can access result page via URL like: [ACCESS RESULT APP]({{TRAFFIC_HOST1_31001}}) - it might look like this : 
 
 ![](https://i.ibb.co/r6RxLHf/image.png)
 
