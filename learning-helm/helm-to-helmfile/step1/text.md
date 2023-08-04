@@ -17,12 +17,16 @@ These have YAML files to deploy
 1. Voting app - web app once vote received (via browser) - they are saved into Redis
 1. Redis server
 1. .NET code that scans Redis server and inserts votes into Database 
-1. Database to store Votesthe  
-1. Result app that shows votes via reading Database 
+2. Database to store Votes   
+3. Result app that shows votes via reading Database 
 
 There are five apps above - which means we should have 5 Kubernetes deployment files - that is what you will find in `k8s-specifications` 
 Now we also need a stable end-point to access apps above. 
 The votting app and result app are exposed outside the cluster via NodePort and DB and Redis are exposed internally using ClusterIP.
+
+`tree ~/example-voting-app/k8s-specifications/`{{exec}}
+
+Output 
 
 ```
 |-- db-deployment.yaml
@@ -63,8 +67,12 @@ After few seconds you should see all pods and service up and running..
 
 Everything gets deployed in `default` namespace.
 
+`kubectl get pods && kubectl get svc`{{exec}} 
+
+Sample output : 
+================
+
 ```
-controlplane $ kubectl get pods && kubectl get svc
 NAME                     READY   STATUS    RESTARTS   AGE
 db-989b6b476-jqw6r       1/1     Running   0          2m28s
 redis-7fdbb9576f-2vqvq   1/1     Running   0          2m28s
@@ -81,6 +89,8 @@ vote         NodePort    10.96.230.143    <none>        5000:31000/TCP   2m28s
 
 You should be able to access voting GUI via URL like http://(node-ip):31000 - it will look like this : 
 
+[ACCESS VOTE APP]({{TRAFFIC_HOST1_31000}})
+
 ![](https://i.ibb.co/s5QMMtM/image.png)
 
 Submit your vote and now you can access result page via URL like: http://(node-ip):31001 - it might look like this : 
@@ -88,3 +98,9 @@ Submit your vote and now you can access result page via URL like: http://(node-i
 ![](https://i.ibb.co/r6RxLHf/image.png)
 
 This concludes our steps of deploying multi-tier applications on kubernetes using YAML files.  
+
+# Teardown all that we deployed 
+
+Before we go to next step lets delete everything that we just deployed 
+
+`kubectl delete -f ~/example-voting-app/k8s-specifications/`{{exec}} 
