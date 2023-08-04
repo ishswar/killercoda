@@ -47,7 +47,7 @@ Output
 
 We can deploy all of them in one shot using command (assuming you are in that directory ) 
 
-`kubectl create -f .`{{exec}} 
+`kubectl create -f ~/example-voting-app/k8s-specifications/`{{exec}} 
 
 output should look like 
 
