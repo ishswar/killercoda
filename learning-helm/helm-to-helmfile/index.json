@@ -1,6 +1,6 @@
 {
-  "title": "Linux Files Intro",
-  "description": "Let's learn some basic commands to work with files on a Linux system",
+  "title": "Helm charts and Helmfile intro",
+  "description": "We will go over Helm charts and then how to orchestrate those charts using  Helmfiles",
   "details": {
     "intro": {
       "text": "intro.md",
@@ -28,6 +28,6 @@
     }
   },
   "backend": {
-    "imageid": "ubuntu"
+    "imageid": "kubernetes-kubeadm-1node"
   }
 }
