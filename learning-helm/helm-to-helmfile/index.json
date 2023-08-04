@@ -17,7 +17,7 @@
         "text": "step2/text.md"
       },
       {
-        "title": "Add Helmfile in mid and Deploy using Helmfile tool",
+        "title": "Use of templates for injecting values",
         "text": "step3/text.md"
       }
     ],

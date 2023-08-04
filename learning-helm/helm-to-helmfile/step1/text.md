@@ -99,6 +99,10 @@ Submit your vote and now you can access result page via URL like: [ACCESS RESULT
 
 ![](https://i.ibb.co/r6RxLHf/image.png)
 
+So, now it should be evidently clear to you that we have two applications which are expose to end-user - applications for voting and application for checking the result 
+
+![](https://i.ibb.co/YXfZXG2/voterapp-1.png)
+
 This concludes our steps of deploying multi-tier applications on kubernetes using YAML files.  
 
 # Teardown all that we deployed 

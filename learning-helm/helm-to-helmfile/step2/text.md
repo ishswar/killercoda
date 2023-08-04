@@ -112,8 +112,6 @@ This concludes our demo about how you can deploy same multi-tier application usi
 
 ## Tear down the setup 
 
-```
-helm uninstall db redis worker result vote 
-```{{exec}} 
+`helm uninstall db redis worker result vote `{{exec}} 
 
 Not much has changed as of now - but now in next topic we will start to externalize some of  the information so during deployment we can provide updated values. 
