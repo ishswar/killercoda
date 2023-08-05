@@ -110,3 +110,26 @@ This concludes our steps of deploying multi-tier applications on kubernetes usin
 Before we go to next step lets delete everything that we just deployed 
 
 `kubectl delete -f ~/example-voting-app/k8s-specifications/`{{exec}} 
+
+# Summary of this step 
+
+- The goal is to deploy a multi-tier voting application using Kubernetes YAML manifests.
+- A Git repo with the app code and YAML specs is cloned.
+- There are 5 components: vote app, result app, redis, .NET worker, and database.
+- Each has a Kubernetes deployment and service YAML file.
+- kubectl create is used to deploy all manifests to the default namespace.
+- The vote and result apps are exposed via NodePort services.
+- The deployed apps can be accessed on the provided URLs.
+- This demonstrates deploying a multi-tier app on Kubernetes using raw YAML manifests.
+- The YAML files define the replica count, images, ports, etc for each component.
+- Finally, kubectl delete is used to tear down the deployment and clean up.
+
+In summary, the key points are:
+
+Cloning Git repo with YAML manifests
+Deploying YAMLs for each app component
+Exposing vote and result apps via NodePort
+Accessing the deployed application
+Deploying a multi-tier app on Kubernetes using YAML
+Tearing down deployment using kubectl delete
+Overall, it shows how to deploy a multi-tier, multi-component application on Kubernetes using raw manifest YAML files.

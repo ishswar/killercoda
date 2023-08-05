@@ -115,3 +115,36 @@ This concludes our demo about how you can deploy same multi-tier application usi
 `helm uninstall db redis worker result vote `{{exec}} 
 
 Not much has changed as of now - but now in next topic we will start to externalize some of  the information so during deployment we can provide updated values. 
+
+# Summary of this page 
+
+- The goal is to deploy a multi-tier voting application using Helm charts.
+
+- Helm charts are created for each component: db, vote, redis, worker, result.
+
+- The existing Kubernetes YAML manifests are moved into the templates folder of each chart.
+
+- The helm create and helm install commands are used to generate and deploy the charts. 
+
+- This allows deploying the same application but now using a Helm chart per component.
+
+- The applications can be accessed on the same endpoints as before, just deployed via Helm.
+
+- The helm list command shows all installed releases from the charts.
+
+- This demonstrates deploying a multi-tier app with Helm instead of raw YAML manifests. 
+
+- Helm provides benefits like versioning, templating, managing upgrades/dependencies, etc.
+
+- The final step is uninstalling the charts to clean up the deployment.
+
+In summary, the key points are:
+
+- Converting raw YAML manifests to Helm charts
+- Creating a chart per application component 
+- Deploying the multi-tier app using helm install
+- Accessing the application on the same endpoints 
+- Leveraging Helm benefits like templating, versioning, etc.
+- Uninstalling charts to tear down deployment
+
+Overall, it demonstrates using Helm and charts to deploy a multi-tier application, as an improvement over raw YAML manifests.

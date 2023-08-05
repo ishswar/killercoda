@@ -1,26 +1,26 @@
-How use templates to insert/provide values for application configuration
+How to use templates to insert/provide values for application configuration
 
 <br>
 
 # All about HTTP Port 
 
-In next few topics we are going to focus on how one can provide the value for HTTP Port for `vote` and `result` app.
-We want to learn how we can provide this values during chart creation as well how we can overwrite these values during chart installation 
+In the next few sections, we will focus on techniques to provide the HTTP port value for the `vote` and `result` applications. We'll learn approaches to set these values both during chart creation and installation.
 
 ![](https://i.ibb.co/Y0KTHd0/voterapp-2.png)
 
 # Use of values file in helm chart 
 
-Each helm chart has value.yaml - you can imagine as input file or configuration file or properties file for Chart. 
+Each Helm chart has a `values.yaml` file that serves as an input file for configuration values. 
 
-- You define a nested structure in values.yaml 
-- And you update your chart to use that values file 
+- You can define a nested structure of values in `values.yaml`. 
 
-Just becurse you see some values in _value.yaml_ does not mean chart is using it; you need to check actual chart yaml(s) to see it is indeed using those values. 
+- The chart templates can then reference these values.
 
-So lets see that in action 
+Simply defining values in `values.yaml` doesn't mean the chart uses them. You need to check the chart's YAML templates to confirm they reference the values. 
 
-Start by checking out branch `with-helm-values`
+Let's look at an example to see this in action.
+
+Checkout the `with-helm-values` branch:
 
 You can use command 
 
@@ -126,3 +126,44 @@ vote   NodePort   10.110.168.80   <none>        5000:31005/TCP   101s
 Remove all charts and apps using this command 
 
 `helm uninstall db redis worker result vote `{{exec}} 
+
+# Summery of this step 
+
+Here is a summary of the key points from the provided Markdown text:
+
+- The goal is to use Helm values to externalize application configuration like ports.
+
+- The vote and result app Helm charts are modified to reference `.Values`. 
+
+- Their service YAMLs now use `.Values.service.type` and `.Values.service.nodeport`.
+
+- These values are defined in values.yaml for each chart.
+
+- Helm templates can reference values using `.Values.<path>`. 
+
+- The apps are deployed using helm install referencing the chart directories.
+
+- The vote service nodePort is verified to be using the value from values.yaml.
+
+- The port value is updated directly in values.yaml and vote chart upgraded. 
+
+- The service picks up the new nodePort value from values.yaml.
+
+- This demonstrates externalizing config like ports into values.yaml.
+
+- Templates can then consume these values.
+
+- Useful for customizing charts for different environments.
+
+- Finally, all charts are uninstalled to clean up.
+
+In summary, the key points are:
+
+- Externalizing app config values into values.yaml
+- Modifying chart templates to reference .Values
+- Passing values from values.yaml to templates 
+- Updating values and upgrading chart
+- Consuming customized values from templates
+- Uninstalling charts to cleanup
+
+Overall, it shows how to effectively parameterize application configuration using Helm values and templates.
