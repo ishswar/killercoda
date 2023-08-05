@@ -8,21 +8,21 @@ Reasons to use Helmfile instead of just Helm when deploying multiple charts:
 
 ## Simplified management of multiple releases
 
-Helmfile allows deploying entire environments specified in a simple declarative YAML format. Much easier than running helm install/upgrade commands.
-Charts, values, namespaces, etc. can be specified together for the overall environment.
-Supports templating to reduce duplication across similar releases.
+Helmfile allows deploying entire environments specified in a simple declarative YAML format. Much easier than running helm install/upgrade commands.  
+Charts, values, namespaces, etc. can be specified together for the overall environment.  
+Supports templating to reduce duplication across similar releases.  
 
 ## Synchronization of releases
 
-Helmfile has primitives like hooks, wait, retries, and timeouts to handle ordering and synchronize releases.
-E.g. Wait for a database chart to be up before deploying the backend. Retry failed installations.
-Such cross-release coordination is difficult to orchestrate with just Helm.
+Helmfile has primitives like hooks, wait, retries, and timeouts to handle ordering and synchronize releases.  
+E.g. Wait for a database chart to be up before deploying the backend. Retry failed installations.  
+Such cross-release coordination is difficult to orchestrate with just Helm.  
 
 ## Environment separation
 
-Helmfile can maintain different files for dev, staging, prod environments.
-Switch environments easily by changing context in a single command.
-Helm needs extra scripts and flags to achieve separation between environments.
+Helmfile can maintain different files for dev, staging, prod environments.  
+Switch environments easily by changing context in a single command.  
+Helm needs extra scripts and flags to achieve separation between environments.  
 
 _In summary, once you reach a certain scale, Helmfile becomes indispensable for managing the complexity of multi-release deployments, release coordination, and multi-environment workflows._
 
