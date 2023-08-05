@@ -126,10 +126,10 @@ Before we go to next step lets delete everything that we just deployed
 
 In summary, the key points are:
 
-Cloning Git repo with YAML manifests
-Deploying YAMLs for each app component
-Exposing vote and result apps via NodePort
-Accessing the deployed application
-Deploying a multi-tier app on Kubernetes using YAML
-Tearing down deployment using kubectl delete
-Overall, it shows how to deploy a multi-tier, multi-component application on Kubernetes using raw manifest YAML files.
+- Cloning Git repo with YAML manifests
+- Deploying YAMLs for each app component
+- Exposing vote and result apps via NodePort
+- Accessing the deployed application
+- Deploying a multi-tier app on Kubernetes using YAML
+- Tearing down deployment using kubectl delete
+- Overall, it shows how to deploy a multi-tier, multi-component application on Kubernetes using raw manifest YAML files.
