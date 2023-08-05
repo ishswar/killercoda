@@ -302,3 +302,29 @@ kubectl get svc -l app=vote
 NAME   TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
 vote   NodePort   10.104.56.191   <none>        5000:31007/TCP   88m
 ```
+
+# Summery of this step 
+
+Here is a summary of the key points from the provided Markdown:
+
+- Helmfile provides a declarative way to manage multiple Helm releases. Useful at scale vs raw Helm commands.
+
+- Allows deploying whole environments defined in easy to read YAML manifests.
+
+- Can synchronize releases with hooks for ordering (wait, retries, timeouts).
+
+- Supports multiple environment states (dev, staging, prod). Environment separation.
+
+- Templating reduces duplication across environments.
+
+- Installs Helmfile and creates a sample helmfile.yaml to deploy charts.
+
+- Charts are installed in the order defined.
+
+- Can override chart values in helmfile.yaml without modifying charts.
+
+- Enables multiple values files per environment. Switch with -e flag.
+
+- Uses Go templates for dynamic values based on environment.
+
+In summary, Helmfile brings orchestration and management capabilities at scale for multi-release, multi-environment Kubernetes applications deployed through Helm. Reduces helm commands complexity.
