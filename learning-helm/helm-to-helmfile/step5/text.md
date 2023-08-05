@@ -234,7 +234,7 @@ vote:
   service:
     nodeport: "31008"
 EOF
-```
+```{{exec}}
 
 env.gotmpl
 
@@ -245,7 +245,7 @@ vote:
   service:
     nodeport: "31008"
 EOF
-```
+```{{exce}}
 
 Save them in same directory as where `helmfile.yaml` is present. 
 
