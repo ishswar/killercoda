@@ -36,7 +36,7 @@ tar -xvf helmfile_0.151.0_linux_amd64.tar.gz
 mv helmfile /usr/sbin/
 ```{{exec}}
 
-Af you installed it you can run `version` command to see if it got installed successfully or not 
+After you installed it you can run `version` command to see if it got installed successfully or not 
 
 `helmfile -v`{{exec}}
 
@@ -53,7 +53,7 @@ git checkout with-helmfile
 
 Under `k8s-specifications` you will find a _new_ file named `helmfile.yaml` - if you open it is is very simple as shown below :  
 
-```
+```plan
 ---
 releases:
 
@@ -69,7 +69,7 @@ releases:
   chart: vote
 ```
 
-** Note ** : File does not need to be called helmfile.yaml - but that is default file name that is expected if you want to use your own name you will need to pass flag `--file newname-helmfile.yaml` to provided new name.
+<img src="https://www.goodfreephotos.com/albums/vector-images/info-symbol-vector-graphics.png" alt="Girl in a jacket" width="30" height="30"> File does not need to be called helmfile.yaml - but that is default file name that is expected if you want to use your own name you will need to pass flag `--file newname-helmfile.yaml` to provided new name.
 
 What it means is it will deploy all of above charts in order they shows up.
 You can also run a command `helmfile list` on helmfile to see what all chart will get installed and in what order
