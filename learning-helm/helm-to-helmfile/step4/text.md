@@ -9,7 +9,7 @@ For this you can potentially come up with separate `values.yaml` and pass that v
 
 You can see there is one extra `values-dev.yaml` that is found under `vote` folder - if you inspect it has some extra parameters so if you want to use that you can re-run `helm` install command like 
 
-`helm install vote ./vote -f ./vote/values-dev.yaml`{{exec}} 
+`helm install vote ./vote -f ~/example-voting-app/k8s-specifications/vote/values-dev.yaml`{{exec}} 
 
 So, this way you can use `/vote/values.yaml` for production but for development environment if you want to use additional or different parameters you can just have separate values.yaml file and use that for that purpose.
 

@@ -48,9 +48,7 @@ You can now check-out branch `with-helmfile`
 
 `git checkout with-helmfile`{{exec}}
 
-Under `k8s-specifications` you will find a file named `helmfile.yaml` - if you open it is is very simple like 
-** Note ** : File does not need to be called helmfile.yaml - but that is defalut file name that is expected if you want to use your own name you will need to pass flag `--file newname-helmfile.yaml` to provided new name.
-
+Under `k8s-specifications` you will find a _new_ file named `helmfile.yaml` - if you open it is is very simple as shown below :  
 
 ```
 ---
@@ -68,11 +66,19 @@ releases:
   chart: vote
 ```
 
+** Note ** : File does not need to be called helmfile.yaml - but that is default file name that is expected if you want to use your own name you will need to pass flag `--file newname-helmfile.yaml` to provided new name.
+
 What it means is it will deploy all of above charts in order they shows up.
-You can also run a command `list` on helmfile to see what all chart 
+You can also run a command `helmfile list` on helmfile to see what all chart will get installed and in what order
 
 ```
+cd ~/example-voting-app/k8s-specifications
 helmfile list
+```{{exec}}
+
+Sample output : 
+
+```
 NAME  	NAMESPACE	ENABLED	LABELS	CHART 	VERSION
 db    	         	true   	      	db
 result	         	true   	      	result
@@ -81,22 +87,16 @@ worker	         	true   	      	worker
 vote  	         	true   	      	vote
 ```
 
-So above command also shows that helmfile knows what chart to installed and in what order 
-
-
 ## Deploying using helmfile 
 
 Deploying using helmfile is easy; command to initiate deployment is 
 
-```
-helmfile sync
-```
+`helmfile sync`{{exec}}
 
 Sample out put is shown below 
 You can see that it installed each helm chart in oder that we defined in `helmfile.yaml`
 
 ```
-ubuntu:zhqu-test@3.138.247.64:~/k8s2/example-voting-app/k8s-specifications$helmfile sync
 Building dependency release=db, chart=db
 Building dependency release=redis, chart=redis
 Building dependency release=worker, chart=worker
@@ -176,15 +176,15 @@ db       db         0.1.0
 
 ## Updating value in charts 
 
-After above deployment is suceeds you can check the nodePort used by `vote` chart - you can see it is using default value of `31004` - this value is defined in `chart/values.yaml` file 
+After above deployment is succeeds you can check the nodePort used by `vote` chart - you can see it is using default value of `31004` - this value is defined in `chart/values.yaml` file 
 
 ```
-ubuntu:zhqu-test@3.138.247.64:~/k8s2/example-voting-app/k8s-specifications$kubectl get svc -l app=vote
+kubectl get svc -l app=vote
 NAME   TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
 vote   NodePort   10.104.56.191   <none>        5000:31004/TCP   59m
 ```
 
-What if you want to update that value - now you don't have to go to that chart and update values.yaml - you can do that rigit from `helmfile.yaml` file 
+What if you want to update that value - now you don't have to go to that chart and update values.yaml - you can do that right from `helmfile.yaml` file 
 Below is example that shows how you can provide values for each individual charts 
 
 
@@ -207,7 +207,7 @@ releases:
       nodeport: 31009
 ```
 
-If you update the value of `helmfile.yaml` with above value and run `helmfile sync` you will see the nodePort for `vote` service will be now using port `31009`
+If you update the value of `helmfile.yaml` with above value and run `helmfile sync`{{exec}} you will see the nodePort for `vote` service will be now using port `31009`
 
 ```
 kubectl get svc -l app=vote
@@ -215,10 +215,10 @@ NAME   TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
 vote   NodePort   10.104.56.191   <none>        5000:31009/TCP   71m
 ```
 
-### Multiplue environment 
+### Multiple environment 
 
-Going back to our previous example of having one `default` set of values and one for `devlopment` environment setting - how do we do that now in `helmfile` ? 
-One way of doing that is to create a 2 go template file ( it's a basically yaml file - but it is porceed by go lang so you can use some go formating/condtioning thee)
+Going back to our previous example of having one `default` set of values and one for `development` environment setting - how do we do that now in `helmfile` ? 
+One way of doing that is to create a 2 go template file ( it's a basically yaml file - but it is proceed by go lang so you can use some go formatting/conditioning thee)
 
 Let's create two files called `default.gotmpl` and `env.gotmpl` 
 
