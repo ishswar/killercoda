@@ -63,7 +63,7 @@ NAME   TYPE       CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
 vote   NodePort   10.98.231.89   <none>        5000:31006/TCP   5m35s
 ```
 
-** Note ** : You can use same `--set` flag during installed as well - above example show it in use with `upgrade` command as we already had chart `vote` installed 
+<img src="https://www.goodfreephotos.com/albums/vector-images/info-symbol-vector-graphics.png" alt="Girl in a jacket" width="30" height="30"> You can use same `--set` flag during installed as well - above example show it in use with `upgrade` command as we already had chart `vote` installed 
 
 # One Chart of rule all charts  
 
