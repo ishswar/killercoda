@@ -1,202 +1,296 @@
-How to meet a need for having environment specific values 
+Managing Kubernetes Deployments at Scale with Helmfile
 
 <br>
 
-## Different setup Different values file    
+# Helm files orchestrator - helmfile tool  
 
-Now, for example you have Development setup and Production setup - but in Dev setup need to use one set of commands/values and production needs to use different. 
-For this you can potentially come up with separate `values.yaml` and pass that value during installation . 
+Reasons to use Helmfile instead of just Helm when deploying multiple charts:
 
-You can see there is one extra `values-dev.yaml` that is found under `vote` folder - if you inspect it has some extra parameters so if you want to use that you can re-run `helm` install command like 
+## Simplified management of multiple releases
 
-`helm install vote ./vote -f ./vote/values-dev.yaml`{{exec}} 
+Helmfile allows deploying entire environments specified in a simple declarative YAML format. Much easier than running helm install/upgrade commands.
+Charts, values, namespaces, etc. can be specified together for the overall environment.
+Supports templating to reduce duplication across similar releases.
 
-So, this way you can use `/vote/values.yaml` for production but for development environment if you want to use additional or different parameters you can just have separate values.yaml file and use that for that purpose.
+## Synchronization of releases
 
-If you ever wanted to see what actual values that chart is using in k8s cluster you can run command like below that will fetch actual values currently used in cluster 
+Helmfile has primitives like hooks, wait, retries, and timeouts to handle ordering and synchronize releases.
+E.g. Wait for a database chart to be up before deploying the backend. Retry failed installations.
+Such cross-release coordination is difficult to orchestrate with just Helm.
 
-For example if I want to use what value chart `vote` is using I can use this command
+## Environment separation
+
+Helmfile can maintain different files for dev, staging, prod environments.
+Switch environments easily by changing context in a single command.
+Helm needs extra scripts and flags to achieve separation between environments.
+
+_In summary, once you reach a certain scale, Helmfile becomes indispensable for managing the complexity of multi-release deployments, release coordination, and multi-environment workflows._
+
+## Install Helmfile  
+
+Installing helmfile is easy - sample steps are like below 
 
 ```plain
-helm get values vote
-```{{exec}} 
+wget https://github.com/helmfile/helmfile/releases/download/v0.151.0/helmfile_0.151.0_linux_amd64.tar.gz
+tar -xvf helmfile_0.151.0_linux_amd64.tar.gz 
+mv helmfile /usr/sbin/
+```{{exec}}
 
-Sample output : 
+Af you installed it you can run `version` command to see if it got installed successfully or not 
 
-```plain
-USER-SUPPLIED VALUES:
-debug:
-  enabled: true
-  startup:
-    command: '"gunicorn", "app:app", "-b", "0.0.0.0:80", "--log-file", "-", "--access-logfile",
-      "-","--log-level=DEBUG", "--workers", "4", "--keep-alive", "0"'
-service:
-  nodeport: 31005
-  type: NodePort
+`helmfile -v`{{exec}}
+
+Sample output 
+
+`helmfile version v0.139.9`
+
+You can now check-out branch `with-helmfile` 
+
+`git checkout with-helmfile`{{exec}}
+
+Under `k8s-specifications` you will find a file named `helmfile.yaml` - if you open it is is very simple like 
+** Note ** : File does not need to be called helmfile.yaml - but that is defalut file name that is expected if you want to use your own name you will need to pass flag `--file newname-helmfile.yaml` to provided new name.
+
+
+```
+---
+releases:
+
+- name: db
+  chart: db
+- name: result
+  chart: result
+- name: redis
+  chart: redis
+- name: worker
+  chart: worker
+- name: vote
+  chart: vote
 ```
 
-### Giving values during helm install 
+What it means is it will deploy all of above charts in order they shows up.
+You can also run a command `list` on helmfile to see what all chart 
 
-In above example we saw we can provide additional or alternative values for parameters that are defined in `values.yaml` by providing new file during install. But what if you want to just overwrite only one value - how would we do that ? For that you can use flag `--set` and give full yaml path to that parameter that you want to overwrite .
+```
+helmfile list
+NAME  	NAMESPACE	ENABLED	LABELS	CHART 	VERSION
+db    	         	true   	      	db
+result	         	true   	      	result
+redis 	         	true   	      	redis
+worker	         	true   	      	worker
+vote  	         	true   	      	vote
+```
 
-For example if I want to use different port for vote charts service
-Currently it is using value `31005` as it was defined in values-dev.yaml - what if I want to update that or during install I want to change that.
+So above command also shows that helmfile knows what chart to installed and in what order 
+
+
+## Deploying using helmfile 
+
+Deploying using helmfile is easy; command to initiate deployment is 
+
+```
+helmfile sync
+```
+
+Sample out put is shown below 
+You can see that it installed each helm chart in oder that we defined in `helmfile.yaml`
+
+```
+ubuntu:zhqu-test@3.138.247.64:~/k8s2/example-voting-app/k8s-specifications$helmfile sync
+Building dependency release=db, chart=db
+Building dependency release=redis, chart=redis
+Building dependency release=worker, chart=worker
+Building dependency release=vote, chart=vote
+Building dependency release=result, chart=result
+Affected releases are:
+  db (db) UPDATED
+  redis (redis) UPDATED
+  result (result) UPDATED
+  vote (vote) UPDATED
+  worker (worker) UPDATED
+
+Upgrading release=result, chart=result
+Upgrading release=db, chart=db
+Upgrading release=redis, chart=redis
+Upgrading release=vote, chart=vote
+Upgrading release=worker, chart=worker
+Release "redis" does not exist. Installing it now.
+NAME: redis
+LAST DEPLOYED: Thu Aug  3 21:01:40 2023
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
+
+Listing releases matching ^redis$
+Release "worker" does not exist. Installing it now.
+NAME: worker
+LAST DEPLOYED: Thu Aug  3 21:01:40 2023
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
+
+Listing releases matching ^worker$
+Release "result" does not exist. Installing it now.
+NAME: result
+LAST DEPLOYED: Thu Aug  3 21:01:40 2023
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
+
+Listing releases matching ^result$
+Release "vote" does not exist. Installing it now.
+NAME: vote
+LAST DEPLOYED: Thu Aug  3 21:01:40 2023
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
+
+Listing releases matching ^vote$
+Release "db" does not exist. Installing it now.
+NAME: db
+LAST DEPLOYED: Thu Aug  3 21:01:40 2023
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
+
+Listing releases matching ^db$
+redis	default  	1       	2023-08-03 21:01:40.752330859 +0000 UTC	deployed	redis-0.1.0	1.16.0
+
+worker	default  	1       	2023-08-03 21:01:40.771005718 +0000 UTC	deployed	worker-0.1.0	1.16.0
+
+vote	default  	1       	2023-08-03 21:01:40.780854103 +0000 UTC	deployed	vote-0.1.0	1.16.0
+
+result	default  	1       	2023-08-03 21:01:40.77468087 +0000 UTC	deployed	result-0.1.0	1.16.0
+
+db  	default  	1       	2023-08-03 21:01:40.777775696 +0000 UTC	deployed	db-0.1.0	1.16.0
+
+
+UPDATED RELEASES:
+NAME     CHART    VERSION
+redis    redis      0.1.0
+worker   worker     0.1.0
+result   result     0.1.0
+vote     vote       0.1.0
+db       db         0.1.0
+```
+
+## Updating value in charts 
+
+After above deployment is suceeds you can check the nodePort used by `vote` chart - you can see it is using default value of `31004` - this value is defined in `chart/values.yaml` file 
+
+```
+ubuntu:zhqu-test@3.138.247.64:~/k8s2/example-voting-app/k8s-specifications$kubectl get svc -l app=vote
+NAME   TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+vote   NodePort   10.104.56.191   <none>        5000:31004/TCP   59m
+```
+
+What if you want to update that value - now you don't have to go to that chart and update values.yaml - you can do that rigit from `helmfile.yaml` file 
+Below is example that shows how you can provide values for each individual charts 
+
+
+```
+---
+releases:
+
+- name: db
+  chart: db
+- name: result
+  chart: result
+- name: redis
+  chart: redis
+- name: worker
+  chart: worker
+- name: vote
+  chart: vote
+  values:
+   - service:
+      nodeport: 31009
+```
+
+If you update the value of `helmfile.yaml` with above value and run `helmfile sync` you will see the nodePort for `vote` service will be now using port `31009`
 
 ```
 kubectl get svc -l app=vote
-NAME   TYPE       CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
-vote   NodePort   10.98.231.89   <none>        5000:31005/TCP   5m9s
+NAME   TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+vote   NodePort   10.104.56.191   <none>        5000:31009/TCP   71m
 ```
 
-If you want to update on existing installed chart you can again use command upgrade and run command like below 
+### Multiplue environment 
 
-`helm upgrade vote ./vote -f ~/example-voting-app/k8s-specifications/vote/values-dev.yaml --set service.nodeport=31006`{{exec}} 
+Going back to our previous example of having one `default` set of values and one for `devlopment` environment setting - how do we do that now in `helmfile` ? 
+One way of doing that is to create a 2 go template file ( it's a basically yaml file - but it is porceed by go lang so you can use some go formating/condtioning thee)
 
-You can see value gets updated 
+Let's create two files called `default.gotmpl` and `env.gotmpl` 
 
-`kubectl get svc -l app=vote`{{exec}}
-
-Sample output 
-
-```
-NAME   TYPE       CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
-vote   NodePort   10.98.231.89   <none>        5000:31006/TCP   5m35s
-```
-
-** Note ** : You can use same `--set` flag during installed as well - above example show it in use with `upgrade` command as we already had chart `vote` installed 
-
-# One Chart of rule all charts  
-
-Before proceed with this - remove all old charts (`helm uninstall db redis worker result vote `) and checkout branch `with-helm-dependency`
-
-`git checkout with-helm-dependency`{{exec}}
-
-So far in above examples you have seen we have to install all charts one by one - what if you want to install all of them in one shot ? 
-We know chart `vote` is sort of parent chart and all other charts are needed dependencies - so in that we can make them dependent chart for vote 
-
-You do that by adding below lines to `vote/Charts.yaml`
+env.gotmpl
 
 ```
-dependencies:
-  - name: db
-    version: 0.1.0
-    repository: file://../db
-  - name: redis
-    version: 0.1.0
-    repository: file://../redis
-  - name: worker
-    version: 0.1.0
-    repository: file://../worker
-  - name: result
-    version: 0.1.0
-    repository: file://../result
-```
-
-What this does is - it adds all of dependent charts under "Charts" folder for `vote`
-As you can see currently that folder is empty 
-
-```
-$tree vote/
-vote/
-├── Chart.lock
-├── Chart.yaml
-├── charts
-├── templates
-│   ├── _helpers.tpl
-│   ├── tests
-│   │   └── test-connection.yaml
-│   ├── vote-deployment.yaml
-│   └── vote-service.yaml
-├── values-dev.yaml
-└── values.yaml
-```
-
-Now if you run a command as shown below that will tar all charts and put them under `Charts` folder 
-
-`helm dependency update ~/example-voting-app/k8s-specifications/vote`{{exec}}
-
-Sample output 
-
-```
-helm dependency update ./vote
-Hang tight while we grab the latest from your chart repositories...
-...Successfully got an update from the "nfs-subdir-external-provisioner" chart repository
-Update Complete. ⎈Happy Helming!⎈
-Saving 4 charts
-Deleting outdated charts
-```
-
-And now if you see the `charts` folder under `vote` chart has all dependent charts tar-ed and copied there 
-
-`tree ~/example-voting-app/k8s-specifications/vote/`{{exec}}
-
-Sample output
-
-```
-vote/
-├── Chart.lock
-├── Chart.yaml
-├── charts
-│   ├── db-0.1.0.tgz
-│   ├── redis-0.1.0.tgz
-│   ├── result-0.1.0.tgz
-│   └── worker-0.1.0.tgz
-├── templates
-│   ├── _helpers.tpl
-│   ├── tests
-│   │   └── test-connection.yaml
-│   ├── vote-deployment.yaml
-│   └── vote-service.yaml
-├── values-dev.yaml
-└── values.yaml
-
-3 directories, 12 files
-```
-
-Now to install all charts only thing we need to do is install chart `vote` and it will installed all dependent charts 
-
-`helm install vote ~/example-voting-app/k8s-specifications/vote`{{exec}}
-
-You will see `vote` chart is installed - unfortunately dependent charts are installed but `helm ls` does not list them 
-
-`helm ls`{{exec}}
-
-Sample output
-
-```
-NAME                           	NAMESPACE	REVISION	UPDATED                                	STATUS  	CHART                                 	APP VERSION
-vote                           	default  	1       	2023-08-03 18:49:57.765825687 +0000 UTC	deployed	vote-0.1.0                            	1.16.0
-```
-
-But you can see all the pods are running so that shows that all charts got installed 
-
-`kubectl get pods`{{exec}}
-
-Sample output 
-
-```
-NAME                                               READY   STATUS    RESTARTS      AGE
-db-5595c8db95-gclq2                                1/1     Running   0             9s
-redis-6986c5d458-k95xg                             1/1     Running   0             9s
-result-7b598bf7b8-smf62                            1/1     Running   0             9s
-vote-595ffc978b-mfphx                              1/1     Running   0             9s
-worker-7594c66d85-h987r                            1/1     Running   0             9s
-```
-
-### How to overwrite values for sub charts ? 
-
-What if you want to update provide new values for nodePort for `result` chart ? 
-We know service for worker is using values and by default it gets value from it's values.yaml - but since now `result` chart is dependent chart we need to provide that updated value differently .
-
-One of the way you can do is update the `vote/values.yaml` file like this : 
-
-```
-result:
+---
+vote:
   service:
-    nodeport: 31025
+    nodeport: "31007"
 ```
 
-This way when helm installs dependent charts it will pass value `service.nodeport` to `result` chart while it installs that chart 
+default.gotmpl
 
-If you want you can play with this - you can uncomment values in `vote/values.yaml` and run `helm upgrade vote ./vote` and you will see value for `result` service is now having value of `31025`
+```
+---
+vote:
+  service:
+    nodeport: "31008"
+```
 
+Save them in same directory as where `helmfile.yaml` is present. 
+
+Now update the helmfile.yaml like below 
+
+```
+environments:
+  default:
+   values:
+    - default.gotmpl
+  dev:
+    values:
+      - env.gotmpl
+---
+
+releases:
+
+- name: db
+  chart: db
+- name: result
+  chart: result
+- name: redis
+  chart: redis
+- name: worker
+  chart: worker
+- name: vote
+  chart: vote
+  values:
+    - service:
+        type: NodePort
+        nodeport: {{ .Environment.Values.vote.service.nodeport }}  
+```
+
+So - here what we are doing is - we are getting value for nodeport from `.Environment.Values` YAML object. 
+Hirarchey after .Environment.Values - is founder inside *.gotmpl found . So kept the same format like before so it start with `vote` then `service` and last the value of `nodeport`
+
+Now we can easily swith between two set of values . 
+
+If we don't give any flag and run `helmfile sync` values will be picked up from `default.gotmpl` 
+** Node ** - It is not becuse file is named `default.gotmpl` thus it gets picked up by default. It is becuse in `helmfile.yaml` under environments.default we are using that file thus it gets picked up as defalut values .
+
+Now if you want to swith to usering `Devlopment` environment value we can run same command as above but with addtional `-e` flag
+
+```
+helmfile -e dev sync
+```
+
+The the wrod `dev` comes from `helmfile.yaml` as there is addtional environment is defined called `dev` and it gets values from `env.gotempl`
+If you look at file `env.gotmpl` the value of vote.service.nodeport is defined to be value of 31007 and after above command suceedes if you check the nodePort of vote service it will have value of 31007 - see below 
+
+```
+kubectl get svc -l app=vote
+NAME   TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+vote   NodePort   10.104.56.191   <none>        5000:31007/TCP   88m
+```
