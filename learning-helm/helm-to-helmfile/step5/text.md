@@ -46,7 +46,10 @@ Sample output
 
 You can now check-out branch `with-helmfile` 
 
-`git checkout with-helmfile`{{exec}}
+```
+cd ~/example-voting-app/k8s-specifications
+git checkout with-helmfile
+```{{exec}}
 
 Under `k8s-specifications` you will find a _new_ file named `helmfile.yaml` - if you open it is is very simple as shown below :  
 
@@ -218,26 +221,30 @@ vote   NodePort   10.104.56.191   <none>        5000:31009/TCP   71m
 ### Multiple environment 
 
 Going back to our previous example of having one `default` set of values and one for `development` environment setting - how do we do that now in `helmfile` ? 
-One way of doing that is to create a 2 go template file ( it's a basically yaml file - but it is proceed by go lang so you can use some go formatting/conditioning thee)
+One way of doing that is to create a 2 go template file ( it's a basically yaml file - but it is proceed by [GoLang](https://pkg.go.dev/text/template) so you can use some go formatting/conditioning there)
 
 Let's create two files called `default.gotmpl` and `env.gotmpl` 
-
-env.gotmpl
-
-```
----
-vote:
-  service:
-    nodeport: "31007"
-```
 
 default.gotmpl
 
 ```
+cat <<EOF > ~/example-voting-app/k8s-specifications/default.gotmpl
 ---
 vote:
   service:
     nodeport: "31008"
+EOF
+```
+
+env.gotmpl
+
+```
+cat <<EOF > ~/example-voting-app/k8s-specifications/env.gotmpl
+---
+vote:
+  service:
+    nodeport: "31008"
+EOF
 ```
 
 Save them in same directory as where `helmfile.yaml` is present. 
@@ -251,7 +258,7 @@ environments:
     - default.gotmpl
   dev:
     values:
-      - env.gotmpl
+    - env.gotmpl
 ---
 
 releases:
@@ -273,21 +280,22 @@ releases:
 ```
 
 So - here what we are doing is - we are getting value for nodeport from `.Environment.Values` YAML object. 
-Hirarchey after .Environment.Values - is founder inside *.gotmpl found . So kept the same format like before so it start with `vote` then `service` and last the value of `nodeport`
+Hierarchy after .Environment.Values - is founder inside *.gotmpl found . So kept the same format like before so it start with `vote` then `service` and last the value of `nodeport`
 
-Now we can easily swith between two set of values . 
+Now we can easily switch between two set of values . 
 
 If we don't give any flag and run `helmfile sync` values will be picked up from `default.gotmpl` 
-** Node ** - It is not becuse file is named `default.gotmpl` thus it gets picked up by default. It is becuse in `helmfile.yaml` under environments.default we are using that file thus it gets picked up as defalut values .
 
-Now if you want to swith to usering `Devlopment` environment value we can run same command as above but with addtional `-e` flag
+** Node ** - It is not becurse file is named `default.gotmpl` thus it gets picked up by default. It is becurse in `helmfile.yaml` under environments.default we are using that file thus it gets picked up as default values .
+
+Now if you want to switch to using `Development` environment value we can run same command as above but with additional `-e` flag
 
 ```
 helmfile -e dev sync
-```
+```{{exec}}
 
-The the wrod `dev` comes from `helmfile.yaml` as there is addtional environment is defined called `dev` and it gets values from `env.gotempl`
-If you look at file `env.gotmpl` the value of vote.service.nodeport is defined to be value of 31007 and after above command suceedes if you check the nodePort of vote service it will have value of 31007 - see below 
+The the word `dev` comes from `helmfile.yaml` as there is additional environment is defined called `dev` and it gets values from `env.gotempl`
+If you look at file `env.gotmpl` the value of vote.service.nodeport is defined to be value of 31007 and after above command succeeds if you check the nodePort of vote service it will have value of 31007 - see below 
 
 ```
 kubectl get svc -l app=vote

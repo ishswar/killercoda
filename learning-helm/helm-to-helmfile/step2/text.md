@@ -105,7 +105,10 @@ worker  default         1               2023-02-22 04:10:35.724799692 +0000 UTC 
 ```
 
 The above shows all 5 charts are installed.   
-Now you can try to access the same URLs as before to access the [ACCESS VOTE APP]({{TRAFFIC_HOST1_31000}}) application and [ACCESS RESULT APP]({{TRAFFIC_HOST1_31001}}) application.
+Now you can try to access the same URLs as before to access the 
+[ACCESS VOTE APP]({{TRAFFIC_HOST1_31000}})
+application and 
+[ACCESS RESULT APP]({{TRAFFIC_HOST1_31001}}) application.
 
 
 This concludes our demo about how you can deploy same multi-tier application using Helm charts
