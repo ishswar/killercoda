@@ -67,7 +67,7 @@ vote   NodePort   10.98.231.89   <none>        5000:31006/TCP   5m35s
 
 # One Chart to rule all charts  
 
-Before proceed with this - remove all old charts (`helm uninstall db redis worker result vote `) and checkout branch `with-helm-dependency`
+Before proceed with this - remove all old charts (`helm uninstall db redis worker result vote`{{exec}}) and checkout branch `with-helm-dependency`
 
 `git checkout with-helm-dependency`{{exec}}
 
