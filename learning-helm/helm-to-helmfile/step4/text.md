@@ -76,7 +76,7 @@ We know chart `vote` is sort of parent chart and all other charts are needed dep
 
 You do that by adding below lines to `vote/Charts.yaml`
 
-```
+```yaml
 dependencies:
   - name: db
     version: 0.1.0
