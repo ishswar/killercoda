@@ -228,7 +228,7 @@ Let's create two files called `default.gotmpl` and `env.gotmpl`
 default.gotmpl
 
 
-```shell
+```plain
 cat <<EOF > ~/example-voting-app/k8s-specifications/default.gotmpl
 ---
 vote:
@@ -236,14 +236,13 @@ vote:
     nodeport: "31008"
 EOF
 ```
-{{exec}}  
  
 
 File : env.gotmpl
 
 
 
-```shell
+```plain
 cat <<EOF > ~/example-voting-app/k8s-specifications/env.gotmpl
 ---
 vote:
@@ -251,7 +250,6 @@ vote:
     nodeport: "31008"
 EOF
 ```
-{{exec}}
 
 Save them in same directory as where `helmfile.yaml` is present. 
 Now update the helmfile.yaml like below : 
@@ -292,7 +290,7 @@ Now we can easily switch between two set of values .
 
 If we don't give any flag and run `helmfile sync` values will be picked up from `default.gotmpl` 
 
-** Node ** - It is not becurse file is named `default.gotmpl` thus it gets picked up by default. It is becurse in `helmfile.yaml` under environments.default we are using that file thus it gets picked up as default values .
+<img src="https://www.goodfreephotos.com/albums/vector-images/info-symbol-vector-graphics.png" alt="Girl in a jacket" width="30" height="30"> - It is not becurse file is named `default.gotmpl` thus it gets picked up by default. It is becurse in `helmfile.yaml` under environments.default we are using that file thus it gets picked up as default values .
 
 Now if you want to switch to using `Development` environment value we can run same command as above but with additional `-e` flag
 
@@ -307,6 +305,16 @@ kubectl get svc -l app=vote
 NAME   TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
 vote   NodePort   10.104.56.191   <none>        5000:31007/TCP   88m
 ```
+
+# Tear down the setup 
+
+With helmfile you can use `destroy` command to clean everything it created 
+
+`helmfile destroy`{{exec}}
+
+
+<img src="https://www.goodfreephotos.com/albums/vector-images/info-symbol-vector-graphics.png" alt="Girl in a jacket" width="30" height="30"> - If you had used `-e <env-name>` during `sync` then you need to use same flag during destroy as well.
+
 
 # Summery of this step 
 
