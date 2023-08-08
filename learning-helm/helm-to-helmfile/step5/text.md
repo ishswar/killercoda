@@ -226,7 +226,7 @@ One way of doing that is to create a 2 go template file ( it's a basically yaml 
 Let's create two files called `default.gotmpl` and `env.gotmpl` 
 
 default.gotmpl
-
+_Copy below lines and execute in command prompt_
 
 ```shell
 cat <<EOF > ~/example-voting-app/k8s-specifications/default.gotmpl
@@ -239,7 +239,7 @@ EOF
  
 
 File : env.gotmpl
-
+_Copy below lines and execute in command prompt_
 
 
 ```shell
@@ -252,7 +252,7 @@ EOF
 ```
 
 Save them in same directory as where `helmfile.yaml` is present. 
-Now update the helmfile.yaml like below : 
+Now update the _helmfile.yaml_ like below : 
 
 
 ```yaml
