@@ -81,7 +81,7 @@ helmfile list
 
 Sample output : 
 
-```
+```shell script 
 NAME  	NAMESPACE	ENABLED	LABELS	CHART 	VERSION
 db    	         	true   	      	db
 result	         	true   	      	result
@@ -99,7 +99,7 @@ Deploying using helmfile is easy; command to initiate deployment is
 Sample out put is shown below 
 You can see that it installed each helm chart in oder that we defined in `helmfile.yaml`
 
-```
+```shell script
 Building dependency release=db, chart=db
 Building dependency release=redis, chart=redis
 Building dependency release=worker, chart=worker
@@ -181,7 +181,7 @@ db       db         0.1.0
 
 After above deployment is succeeds you can check the nodePort used by `vote` chart - you can see it is using default value of `31004` - this value is defined in `chart/values.yaml` file 
 
-```
+```shell script
 kubectl get svc -l app=vote
 NAME   TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
 vote   NodePort   10.104.56.191   <none>        5000:31004/TCP   59m
@@ -191,7 +191,7 @@ What if you want to update that value - now you don't have to go to that chart a
 Below is example that shows how you can provide values for each individual charts 
 
 
-```
+```yaml
 ---
 releases:
 
@@ -212,7 +212,7 @@ releases:
 
 If you update the value of `helmfile.yaml` with above value and run `helmfile sync`{{exec}} you will see the nodePort for `vote` service will be now using port `31009`
 
-```
+```shell script 
 kubectl get svc -l app=vote
 NAME   TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
 vote   NodePort   10.104.56.191   <none>        5000:31009/TCP   71m
@@ -227,7 +227,7 @@ Let's create two files called `default.gotmpl` and `env.gotmpl`
 
 default.gotmpl
 
-```
+```plain
 cat <<EOF > ~/example-voting-app/k8s-specifications/default.gotmpl
 ---
 vote:
@@ -238,7 +238,7 @@ EOF
 
 env.gotmpl
 
-```
+```plain
 cat <<EOF > ~/example-voting-app/k8s-specifications/env.gotmpl
 ---
 vote:
@@ -251,7 +251,7 @@ Save them in same directory as where `helmfile.yaml` is present.
 
 Now update the helmfile.yaml like below 
 
-```
+```yaml
 environments:
   default:
    values:
