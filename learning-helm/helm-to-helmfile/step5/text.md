@@ -235,8 +235,9 @@ vote:
   service:
     nodeport: "31008"
 EOF
-``` 
-
+```
+{{exec}}  
+ 
 
 File : env.gotmpl
 
@@ -250,7 +251,7 @@ vote:
     nodeport: "31008"
 EOF
 ```
-
+{{exec}}
 
 Save them in same directory as where `helmfile.yaml` is present. 
 Now update the helmfile.yaml like below 
