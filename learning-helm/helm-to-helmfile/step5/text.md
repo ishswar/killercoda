@@ -327,4 +327,5 @@ Here is a summary of the key points from the provided Markdown:
 
 - Uses Go templates for dynamic values based on environment.
 
-In summary, Helmfile brings orchestration and management capabilities at scale for multi-release, multi-environment Kubernetes applications deployed through Helm. Reduces helm commands complexity.
+In summary, Helmfile brings orchestration and management capabilities at scale for multi-release, multi-environment Kubernetes applications  
+deployed through Helm. Reduces helm commands complexity.
