@@ -4,7 +4,7 @@ Managing Kubernetes Deployments at Scale with Helmfile
 
 # Helm files orchestrator - helmfile tool  
 
-Reasons to use Helmfile instead of just Helm when deploying multiple charts:
+Reasons to use [Helmfile](https://helmfile.readthedocs.io/en/latest/) instead of just Helm when deploying multiple charts:
 
 ## Simplified management of multiple releases
 
@@ -227,29 +227,34 @@ Let's create two files called `default.gotmpl` and `env.gotmpl`
 
 default.gotmpl
 
-```plain
+
+```shell
 cat <<EOF > ~/example-voting-app/k8s-specifications/default.gotmpl
 ---
 vote:
   service:
     nodeport: "31008"
 EOF
-```{{exec}}
+``` 
 
-env.gotmpl
 
-```plain
+File : env.gotmpl
+
+
+
+```shell
 cat <<EOF > ~/example-voting-app/k8s-specifications/env.gotmpl
 ---
 vote:
   service:
     nodeport: "31008"
 EOF
-```{{exce}}
+```
+
 
 Save them in same directory as where `helmfile.yaml` is present. 
-
 Now update the helmfile.yaml like below 
+
 
 ```yaml
 environments:
@@ -276,7 +281,7 @@ releases:
   values:
     - service:
         type: NodePort
-        nodeport: {{ .Environment.Values.vote.service.nodeport }}  
+        nodeport: {{ .Environment.Values.vote.service.nodeport }} 
 ```
 
 So - here what we are doing is - we are getting value for nodeport from `.Environment.Values` YAML object. 
@@ -290,9 +295,8 @@ If we don't give any flag and run `helmfile sync` values will be picked up from 
 
 Now if you want to switch to using `Development` environment value we can run same command as above but with additional `-e` flag
 
-```
-helmfile -e dev sync
-```{{exec}}
+`helmfile -e dev sync`{{exec}}
+
 
 The the word `dev` comes from `helmfile.yaml` as there is additional environment is defined called `dev` and it gets values from `env.gotempl`
 If you look at file `env.gotmpl` the value of vote.service.nodeport is defined to be value of 31007 and after above command succeeds if you check the nodePort of vote service it will have value of 31007 - see below 
