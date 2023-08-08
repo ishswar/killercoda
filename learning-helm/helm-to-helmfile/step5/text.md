@@ -228,7 +228,7 @@ Let's create two files called `default.gotmpl` and `env.gotmpl`
 default.gotmpl
 
 
-```plain
+```shell
 cat <<EOF > ~/example-voting-app/k8s-specifications/default.gotmpl
 ---
 vote:
@@ -242,7 +242,7 @@ File : env.gotmpl
 
 
 
-```plain
+```shell
 cat <<EOF > ~/example-voting-app/k8s-specifications/env.gotmpl
 ---
 vote:
