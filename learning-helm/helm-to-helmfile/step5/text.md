@@ -290,7 +290,7 @@ Now we can easily switch between two set of values .
 
 If we don't give any flag and run `helmfile sync` values will be picked up from `default.gotmpl` 
 
-<img src="https://www.goodfreephotos.com/albums/vector-images/info-symbol-vector-graphics.png" alt="Girl in a jacket" width="30" height="30"> - It is not becurse file is named `default.gotmpl` thus it gets picked up by default. It is becurse in `helmfile.yaml` under environments.default we are using that file thus it gets picked up as default values .
+<img src="https://www.goodfreephotos.com/albums/vector-images/info-symbol-vector-graphics.png" alt="Girl in a jacket" width="30" height="30"> It is not becurse file is named `default.gotmpl` thus it gets picked up by default. It is becurse in `helmfile.yaml` under environments.default we are using that file thus it gets picked up as default values .
 
 Now if you want to switch to using `Development` environment value we can run same command as above but with additional `-e` flag
 
@@ -313,7 +313,7 @@ With helmfile you can use `destroy` command to clean everything it created
 `helmfile destroy`{{exec}}
 
 
-<img src="https://www.goodfreephotos.com/albums/vector-images/info-symbol-vector-graphics.png" alt="Girl in a jacket" width="30" height="30"> - If you had used `-e <env-name>` during `sync` then you need to use same flag during destroy as well.
+<img src="https://www.goodfreephotos.com/albums/vector-images/info-symbol-vector-graphics.png" alt="Girl in a jacket" width="30" height="30"> If you had used `-e <env-name>` during `sync` then you need to use same flag during destroy as well.
 
 
 # Summery of this step 
