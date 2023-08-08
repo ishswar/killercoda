@@ -254,7 +254,7 @@ EOF
 {{exec}}
 
 Save them in same directory as where `helmfile.yaml` is present. 
-Now update the helmfile.yaml like below 
+Now update the helmfile.yaml like below : 
 
 
 ```yaml
