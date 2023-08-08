@@ -307,7 +307,8 @@ vote   NodePort   10.104.56.191   <none>        5000:31007/TCP   88m
 
 Here is a summary of the key points from the provided Markdown:
 
-- Helmfile provides a declarative way to manage multiple Helm releases. Useful at scale vs raw Helm commands.
+- Helmfile provides a declarative way to manage multiple Helm releases. Useful at  
+  scale vs raw Helm commands.
 
 - Allows deploying whole environments defined in easy to read YAML manifests.
 
