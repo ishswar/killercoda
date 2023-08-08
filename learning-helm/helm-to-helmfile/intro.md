@@ -8,6 +8,8 @@ In this demo we will start with multi tear web app, and see how we can deploy th
 - Running same set of Helm charts using Helmfile 
 - Utilizing Helmfile to support different deployment requirements 
 
+![](https://i.ibb.co/0t5NX62/voterapp-3.png)
+
 # Sample app
 
 Sample deployment files that we will use in this demo come from Repo [example-voting-app](https://github.com/dockersamples/example-voting-app) - thanks a bunch to [Bret Fisher](https://github.com/BretFisher)
