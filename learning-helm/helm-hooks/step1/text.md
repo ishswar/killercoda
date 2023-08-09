@@ -1,5 +1,5 @@
 
-Create Helm charts and use them to Deploy same set of applications
+Create Helm charts and use them to Deploy voting  applications
 
 <br>
 
@@ -7,24 +7,14 @@ Create Helm charts and use them to Deploy same set of applications
 
 Clone my github repo :
 
-`git clone https://github.com/ishswar/example-voting-app.git`{{exec}}
+`cd ~ && git clone https://github.com/ishswar/example-voting-app.git`{{exec}}
 
-All the code is in this repo for this demo
+All the code is in this repo
 
 # Deploy using Helm 
 
-Next step we can deploy same application as before but this time using helm charts. 
-We will create 5 charts - one for each of application. 
-
-General steps : 
-
-1. Create a Helm chart using `helm create` command
-1. Delete YAML files created by above command 
-1. Move our original Helm files for each application under `templates` subfolder 
-1. Use `helm install` to install chart 
-
-You have two choices - create charts manually (follow below steps) or check-out branch using command `git checkout with-helm` this will get you same charts that you will have if you follow below steps.
-
+We will use Helm charts to Deploy Voting application
+Check-out branch using command `cd ~/example-voting-app && git checkout with-helm`{{exec}} this branch has all the charts for deploying all needed microservices.
 
 ## Install using Helm charts 
 
@@ -60,9 +50,5 @@ application and
 
 This concludes our demo about how you can deploy same multi-tier application using Helm charts
 
-## Tear down the setup 
-
-`helm uninstall db redis worker result vote `{{exec}} 
-
-Not much has changed as of now - but now in next topic we will start to externalize some of  the information so during deployment we can provide updated values. 
+Not much has changed as of now - but now in next topic we will start to see how to use Helm Hook to make some post Install/Upgrade changes. 
 
