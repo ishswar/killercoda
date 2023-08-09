@@ -18,15 +18,19 @@ Check-out branch using command `cd ~/example-voting-app && git checkout with-hel
 
 ## Install using Helm charts 
 
-```plain
+```shell
+cd ~/example-voting-app/k8s-specifications
 helm install db ./db 
 helm install redis ./redis
 helm install worker ./worker
 helm install result ./result
 helm install vote ./vote
-```{{exec}} 
+```{{exec}}
+
 
 ### List all charts 
+
+
 
 `helm list`{{exec}} 
 

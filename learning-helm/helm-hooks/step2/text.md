@@ -18,3 +18,7 @@ If you also see `vote-deployment.yaml` that file has now been updated to do two 
 2. We also use on init container that start when POD starts and it's job is to copy `/app` folder from Image to PVC storage 
 
 `cd ~/example-voting-app/k8s-specifications && helm upgrade vote ./vote`{{exec}}
+
+We are using `upgrade` command as we already have `vote` chart installed 
+
+After 
