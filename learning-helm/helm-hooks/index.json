@@ -1,0 +1,39 @@
+{
+  "title": "Helm charts and Helmfile intro",
+  "description": "We will go over Helm charts and then how to orchestrate those charts using  Helmfiles",
+  "details": {
+    "intro": {
+      "text": "intro.md",
+      "background": "setup.sh"
+    },
+    "steps": [
+      {
+        "title": "Deploy app using kubernetes manifest files",
+        "text": "step1/text.md"
+
+      },
+      {
+        "title": "Create Helm Charts and deploy using Helm charts",
+        "text": "step2/text.md"
+      },
+      {
+        "title": "Use of templates for injecting values",
+        "text": "step3/text.md"
+      },
+      {
+        "title": "Use of multiple values file and One helm chart to rule all",
+        "text": "step4/text.md"
+      },
+      {
+        "title": "Use of Helmfile to Orchestrate many charts",
+        "text": "step5/text.md"
+      }
+    ],
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "backend": {
+    "imageid": "kubernetes-kubeadm-2nodes"
+  }
+}
