@@ -7,7 +7,7 @@ Add persistent storage to Vote application so we can use Helm hook to manipulate
 
 For this step you can check out branch `with-helm-hook`
 
-`git checkout with-helm`{{exec}}
+`git checkout with-helm-hook`{{exec}}
 
 In this repo folder `vote/templates` has been updated
 
@@ -47,9 +47,20 @@ NAME                             STATUS   VOLUME                                
 persistentvolumeclaim/vote-pvc   Bound    pvc-c90576f4-bbc5-4bee-8ffe-e7c288dd4889   1Gi        RWO            local-path     9s
 
 NAME           TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
-service/vote   NodePort   10.96.229.141   <none>        5000:31004/TCP   9s
+service/vote   NodePort   10.96.229.141   <none>        5000:31000/TCP   9s
 ```
 
 ## So what changed 
 
 What changed is now `vote` application is using persistent storage and part of `vote` POD startup there is `init-container` that uses same image as `vote` app but it's sole job is to move folder named `/app` to persistent storage. Voting app mounts that storage now part of it's container and uses `/app` folder from there 
+
+### Adding Helm Hook 
+
+Helm hook YAML is already there - we just have to remove "_" from it's name 
+
+`mv vote/templates/_vote-hook.yaml vote/templates/vote-hook.yaml`{{exec}}
+
+Now let's upgrade chart one more time to add Hook in mix 
+
+`cd ~/example-voting-app/k8s-specifications && helm upgrade vote ./vote`{{exec}}
+
