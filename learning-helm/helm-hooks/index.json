@@ -1,6 +1,6 @@
 {
-  "title": "Helm charts and Helmfile intro",
-  "description": "We will go over Helm charts and then how to orchestrate those charts using  Helmfiles",
+  "title": "Helm Hook intro",
+  "description": "How to use Helm Hook to do certain task post install or post upgrade",
   "details": {
     "intro": {
       "text": "intro.md",
@@ -8,25 +8,17 @@
     },
     "steps": [
       {
-        "title": "Deploy app using kubernetes manifest files",
+        "title": "Deploy application using Helm chart",
         "text": "step1/text.md"
 
       },
       {
-        "title": "Create Helm Charts and deploy using Helm charts",
+        "title": "Need for Post install/upgrade task",
         "text": "step2/text.md"
       },
       {
-        "title": "Use of templates for injecting values",
+        "title": "Adding Post install/upgrade Hook",
         "text": "step3/text.md"
-      },
-      {
-        "title": "Use of multiple values file and One helm chart to rule all",
-        "text": "step4/text.md"
-      },
-      {
-        "title": "Use of Helmfile to Orchestrate many charts",
-        "text": "step5/text.md"
       }
     ],
     "finish": {
