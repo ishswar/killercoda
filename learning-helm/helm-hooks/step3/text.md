@@ -28,6 +28,32 @@ worker-6fc5d5b668-8d8w2   1/1     Running     0          112s
 
 In order to get that behavior you need to add one more annotation to Hook definition and that is `"helm.sh/hook-delete-policy": hook-succeeded`; this will tell Hook to delete this JOB/POD after it finishes with exit code 0.
 
+### Update hook to do cleanup 
+
+We already have above annotation part of our Helm Hook Job definition but it is commented out 
+Lets uncomment that 
+
+`sed -i 's|# "helm.sh/hook-delete-policy"|"helm.sh/hook-delete-policy"|g' ~/example-voting-app/k8s-specifications/vote/templates/vote-hook.yaml`
+
+Now let's uninstall old chart and apply new chart 
+
+`cd ~/example-voting-app/k8s-specifications && helm uninstall vote && kubectl delete job vote-post-task && helm install vote ./vote`{{exec}}
+
+Now if you try to get PODS 
+
+`kubectl get pods`{{exec}}
+
+You will see POD for Helm hook is gone 
+
+```
+NAME                      READY   STATUS    RESTARTS   AGE
+db-7fc468458-pwh7n        1/1     Running   0          9m40s
+redis-66949686f7-ws4z2    1/1     Running   0          9m39s
+result-6b9bc65689-vl4mg   1/1     Running   0          9m37s
+vote-564c8dcf4-4k7x2      1/1     Running   0          20s
+worker-6fc5d5b668-z5cck   1/1     Running   0          9m38s
+```
+
 ## Preserving the logs 
 
 One issue we see with setting flag `"helm.sh/hook-delete-policy": hook-succeeded` is that POD gets deleted and with it all log of that Job is gone. 
