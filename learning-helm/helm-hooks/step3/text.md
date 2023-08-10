@@ -4,12 +4,12 @@ Go over Hook definition and talk about Cleanup
 
 # How does hook looks like 
 
-As shown below [Helm Hook](https://helm.sh/docs/topics/charts_hooks/) is basically a definition of Kubernetes job - it creates a POD and waits for it to succeeds. 
-If POD fails it will retry few times until it succeeds.
+As shown below [Helm Hook](https://helm.sh/docs/topics/charts_hooks/) is basically a definition of Kubernetes job - it creates a POD and waits for it to succeed. 
+If POD fails it will _retry_ few times until it succeeds.
 
 ![](https://i.ibb.co/9w1dB4q/image.png)
 
-## Cleanup 
+## Cleanup after Hook succeeds
 
 As of now if you list pods - you will see that there is POD named `vote-post-task-<id>` ; and it's in `Completed` state
 This is the POD that did work of copying content from Image to PVC. Ideally we don't want this job to linger after its work is done. 
@@ -37,7 +37,12 @@ Lets uncomment that
 
 Now let's uninstall old chart and apply new chart 
 
-`cd ~/example-voting-app/k8s-specifications && helm uninstall vote && kubectl delete job vote-post-task && helm install vote ./vote`{{exec}}
+```shell
+cd ~/example-voting-app/k8s-specifications 
+helm uninstall vote
+kubectl delete job vote-post-task
+helm install vote ./vote
+```{{exec}}
 
 Now if you try to get PODS 
 
