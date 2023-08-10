@@ -74,18 +74,19 @@ output should show like this :
 
 As you can see there is word `vs` in it - so in next topic we will see how using Helm hook we can replace string "vs" to "or"
 
-### Adding Helm Hook 
+## Adding Helm Hook 
 
-Now lets add Helm hook that runs during Post install or Post upgrade - that way anytime we do deployment this Hook will be copied
-Helm hook YAML is already there - we just have to remove "_" from it's name 
+Now lets add Helm hook that runs during Post install or Post upgrade - that way anytime we do deployment this Hook will be called
+Helm hook YAML is already there - we just have to remove "_" from it's name (Helm skips any file that start with "_" in `template` folder)
 
+This will move "_" file file name 
 `mv vote/templates/_vote-hook.yaml vote/templates/vote-hook.yaml`{{exec}}
 
 Now let's upgrade chart one more time to add Hook in mix 
 
 `cd ~/example-voting-app/k8s-specifications && helm upgrade vote ./vote`{{exec}}
 
-### File check after Hook has run 
+## File check after Hook has run 
 
 Now if we do same test as before we can see the template file has been updated to use "or" in place of word "vs" 
 
