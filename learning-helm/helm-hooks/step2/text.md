@@ -28,7 +28,7 @@ vote/templates/
 In this you will see we have one new file called `vote-pvc.yaml`
 There is also file called `_vote-hook.yaml` ignore it for now 
 
-# Let install latest chart 
+# Lets install latest chart 
 
 `cd ~/example-voting-app/k8s-specifications && helm upgrade vote ./vote`{{exec}}
 
@@ -107,7 +107,7 @@ You can see word "vs" has been replaced by word "or"
 You can also check the log output of Helm Hook to see what happened. 
 These logs are output of arbitrary `script` that Job/Pod runs.
 
-`kubectl logs -l job-name=vote-info --tail=-1`{{exec}}
+`kubectl logs -l job-name=vote-post-task --tail=-1`{{exec}}
 
 Sample output 
 
