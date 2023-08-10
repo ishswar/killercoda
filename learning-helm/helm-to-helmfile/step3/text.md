@@ -130,7 +130,7 @@ vote   NodePort   10.110.168.80   <none>        5000:31005/TCP   101s
 
 Remove all charts and apps using this command 
 
-`helm uninstall db redis worker result vote `{{exec}} 
+`helm uninstall vote `{{exec}} 
 
 # Summery of this step 
 
