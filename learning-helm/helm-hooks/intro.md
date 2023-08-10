@@ -1,14 +1,14 @@
 # Introduction 
 
-In this demo we will start with multi tear web app, and see how we can deploy them to Kubernetes 
+In this demo we will start with multi tear web app, and see how we can use Helm Hook to manipulate/update setup after its deployed 
 
-- Using just YAML/Manifests 
-- Converting them to individual Helm charts 
-- Creating multiple values file to support different deployment requirement 
-- Running same set of Helm charts using Helmfile 
-- Utilizing Helmfile to support different deployment requirements 
+- Deploy voter app and all it's depdenent micro services 
+- Update Voter app to use Persistent volume 
+- Use init container to move stuff from Docker Image to persistent stuff
+- Use Helm Post install/upgrade Hook to update content of application 
+- Notes on troubleshooting 
 
-![](https://i.ibb.co/0t5NX62/voterapp-3.png)
+![](https://ibb.co/DfDLhv1)
 
 # Sample application
 

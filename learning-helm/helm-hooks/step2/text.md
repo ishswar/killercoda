@@ -66,6 +66,7 @@ As you can see there is word `vs` in it - so in next topic we will see how using
 
 ### Adding Helm Hook 
 
+Now lets add Helm hook that runs during Post install or Post upgrade - that way anytime we do deployment this Hook will be copied
 Helm hook YAML is already there - we just have to remove "_" from it's name 
 
 `mv vote/templates/_vote-hook.yaml vote/templates/vote-hook.yaml`{{exec}}
@@ -79,3 +80,5 @@ Now let's upgrade chart one more time to add Hook in mix
 Now if we do same test as before we can see the template file has been updated to use "or" in place of word "vs" 
 
 `kubectl exec -i deploy/vote -c vote -- cat /app/templates/index.html | grep title`{{exec}}
+
+`kubectl logs -l job-name=vote-info --tail=-1`{{exec}}

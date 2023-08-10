@@ -47,13 +47,12 @@ The above shows all 5 charts are installed.
 
 You can also check on what port voting app is running 
 
-`kubectl get --all -l app=vote`{{exec}}
+`kubectl get -l app=vote`{{exec}}
 
 Now you can try to access the same URLs as before to access the 
 [ACCESS VOTE APP]({{TRAFFIC_HOST1_31000}})
 application and 
 [ACCESS RESULT APP]({{TRAFFIC_HOST1_31001}}) application.
-
 
 This concludes our demo about how you can deploy same multi-tier application using Helm charts
 
