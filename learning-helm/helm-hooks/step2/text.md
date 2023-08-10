@@ -81,7 +81,7 @@ As you can see there is word `vs` in it - so in next topic we will see how using
 Now lets add Helm hook that runs during Post install or Post upgrade - that way anytime we do deployment this Hook will be called
 Helm hook YAML is already there - we just have to remove "_" from it's name (Helm skips any file that start with "_" in `template` folder)
 
-This will remove "_" from file name 
+This will remove "_" from file name   
 `mv vote/templates/_vote-hook.yaml vote/templates/vote-hook.yaml`{{exec}}
 
 Now let's **upgrade** chart one _more_ time to add Hook in mix 
