@@ -81,10 +81,10 @@ As you can see there is word `vs` in it - so in next topic we will see how using
 Now lets add Helm hook that runs during Post install or Post upgrade - that way anytime we do deployment this Hook will be called
 Helm hook YAML is already there - we just have to remove "_" from it's name (Helm skips any file that start with "_" in `template` folder)
 
-This will move "_" file file name 
+This will remove "_" from file name 
 `mv vote/templates/_vote-hook.yaml vote/templates/vote-hook.yaml`{{exec}}
 
-Now let's upgrade chart one more time to add Hook in mix 
+Now let's **upgrade** chart one _more_ time to add Hook in mix 
 
 `cd ~/example-voting-app/k8s-specifications && helm upgrade vote ./vote`{{exec}}
 
@@ -100,7 +100,7 @@ Output should look like this
 <title>{{option_a}} or {{option_b}}!</title>
 ```
 
-You can see word "vs" has been replaced by word "or"
+You can see word "vs" has been replaced by word "or" - **SUCCESS** Hook did its job
 
 ## Check log 
 
