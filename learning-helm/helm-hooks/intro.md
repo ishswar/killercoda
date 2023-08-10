@@ -8,7 +8,7 @@ In this demo we will start with multi tear web app, and see how we can use Helm 
 - Use Helm Post install/upgrade Hook to update content of application 
 - Notes on troubleshooting 
 
-![](https://ibb.co/DfDLhv1)
+![](https://i.ibb.co/hFRCb4g/cat-vs-dog-animation.gif)
 
 # Sample application
 
