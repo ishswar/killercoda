@@ -33,7 +33,7 @@ In order to get that behavior you need to add one more annotation to Hook defini
 We already have above annotation part of our Helm Hook Job definition but it is commented out 
 Lets uncomment that 
 
-`sed -i 's|# "helm.sh/hook-delete-policy"|"helm.sh/hook-delete-policy"|g' ~/example-voting-app/k8s-specifications/vote/templates/vote-hook.yaml`
+`sed -i 's|# "helm.sh/hook-delete-policy"|"helm.sh/hook-delete-policy"|g' ~/example-voting-app/k8s-specifications/vote/templates/vote-hook.yaml`{{exec}}
 
 Now let's uninstall old chart and apply new chart 
 
