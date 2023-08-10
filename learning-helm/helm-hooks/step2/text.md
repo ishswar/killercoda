@@ -70,7 +70,9 @@ If you also see `vote-deployment.yaml` that file has now been updated to do two 
 
 output should show like this : 
 
-`<title>{{option_a}} vs {{option_b}}!</title>`
+```
+<title>{{option_a}} vs {{option_b}}!</title>
+```
 
 As you can see there is word `vs` in it - so in next topic we will see how using Helm hook we can replace string "vs" to "or"
 
