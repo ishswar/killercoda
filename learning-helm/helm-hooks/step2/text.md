@@ -11,13 +11,13 @@ For this step you can check out branch `with-helm-hook`
 
 In this repo folder `vote/templates` has been updated
 
+`cd ~/example-voting-app/k8s-specifications && tree vote/templates/`
+
 ```
-tree vote/templates/
 vote/templates/
 |-- _helpers.tpl
 |-- _vote-hook.yaml
-|-- tests
-|   `-- test-connection.yaml
+|
 |-- vote-deployment.yaml
 |-- vote-pvc.yaml
 `-- vote-service.yaml
@@ -37,7 +37,7 @@ If you also see `vote-deployment.yaml` that file has now been updated to do two 
 
 We are using `upgrade` command as we already have `vote` chart installed 
 
-After upgrade command succeeds if you query cluster using command `kubectl get pods,pvc,svc -l app=vote`{{exec}} you will see new PVC has been added else vote application is running as usually 
+After upgrade command succeeds if you query cluster using command `kubectl get pods,pvc,svc -l app=vote`{{exec}} you will see _new PVC_ has been added else vote application is running as usual 
 
 ```
 NAME                       READY   STATUS            RESTARTS   AGE
@@ -50,9 +50,17 @@ NAME           TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
 service/vote   NodePort   10.96.229.141   <none>        5000:31000/TCP   9s
 ```
 
-## So what changed 
+## So what changed ?
 
 What changed is now `vote` application is using persistent storage and part of `vote` POD startup there is `init-container` that uses same image as `vote` app but it's sole job is to move folder named `/app` to persistent storage. Voting app mounts that storage now part of it's container and uses `/app` folder from that persistent storage 
+
+![](https://i.ibb.co/VvpCQGW/voter-app-change.gif)
+
+### Update to YAML 
+
+Below image shows how voter app's deployment YAML change from previous step to this step 
+
+![](https://i.ibb.co/wKgnvxn/image.png)
 
 ## File check before hook is invoked 
 
