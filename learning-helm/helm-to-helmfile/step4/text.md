@@ -208,6 +208,12 @@ This way when helm installs dependent charts it will pass value `service.nodepor
 
 If you want you can play with this - you can uncomment values in `vote/values.yaml` and run `helm upgrade vote ./vote` and you will see value for `result` service is now having value of `31025`
 
+### Tear down the setup 
+
+Remove all charts and apps using this command 
+
+`helm uninstall db redis worker result vote `{{exec}} 
+
 # Summary of this step 
 
 Here is a summary of the key points from the provided Markdown text:
