@@ -35,6 +35,8 @@ service:
   type: NodePort
 ```
 
+Let's check service is indeed using port `31005` as stated above  - we can use command `kubectl get svc -l app=vote`{{exec}} - this prints info only about `vote` service.
+
 ### Giving values during helm install 
 
 In above example we saw we can provide additional or alternative values for parameters that are defined in `values.yaml` by providing new file during install. But what if you want to just overwrite only one value - how would we do that ? For that you can use flag `--set` and give full yaml path to that parameter that you want to overwrite .
@@ -48,7 +50,7 @@ NAME   TYPE       CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
 vote   NodePort   10.98.231.89   <none>        5000:31005/TCP   5m9s
 ```
 
-If you want to update on existing installed chart you can again use command upgrade and run command like below 
+If you want to update on existing installed chart you can again use command **upgrade** and run command like below 
 
 `helm upgrade vote ./vote -f ~/example-voting-app/k8s-specifications/vote/values-dev.yaml --set service.nodeport=31006`{{exec}} 
 
@@ -65,11 +67,17 @@ vote   NodePort   10.98.231.89   <none>        5000:31006/TCP   5m35s
 
 <img src="https://www.goodfreephotos.com/albums/vector-images/info-symbol-vector-graphics.png" alt="Girl in a jacket" width="30" height="30"> You can use same `--set` flag during installed as well - above example show it in use with `upgrade` command as we already had chart `vote` installed 
 
+### Tear down the setup 
+
+Remove all charts and apps using this command 
+
+`helm uninstall db redis worker result vote `{{exec}} 
+
 # One Chart to rule all charts  
 
 Before proceed with this - remove all old charts (`helm uninstall db redis worker result vote`{{exec}}) and checkout branch `with-helm-dependency`
 
-`git checkout with-helm-dependency`{{exec}}
+`git checkout -f with-helm-dependency`{{exec}}
 
 So far in above examples you have seen we have to install all charts one by one - what if you want to install all of them in one shot ? 
 We know chart `vote` is sort of parent chart and all other charts are needed dependencies - so in that we can make them dependent chart for vote 
