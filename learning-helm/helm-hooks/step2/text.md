@@ -92,4 +92,26 @@ Now if we do same test as before we can see the template file has been updated t
 
 `kubectl exec -i deploy/vote -c vote -- cat /app/templates/index.html | grep title`{{exec}}
 
+Output should look like this 
+
+```
+<title>{{option_a}} or {{option_b}}!</title>
+```
+
+You can see word "vs" has been replaced by word "or"
+
+## Check log 
+
+You can also check the log output of Helm Hook to see what happened. 
+These logs are output of arbitrary `script` that Job/Pod runs.
+
 `kubectl logs -l job-name=vote-info --tail=-1`{{exec}}
+
+Sample output 
+
+```
+File exists, proceeding...
+Updating template
+Done updating template
+Received successful response!
+```
