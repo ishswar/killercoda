@@ -1,8 +1,32 @@
+# Helm Hook
+
+Here is a brief introduction to Helm hooks:
+
+Helm hooks allow running arbitrary scripts and jobs at defined points during a release lifecycle. 
+
+Key reasons hooks are useful:
+
+- Perform initial setup like creating resources before the main deployment.
+
+- Execute post-install steps like migrations, restarts after installation.
+
+- Run cleanup logic like deregistering resources on deletion. 
+
+- Synchronize ordering of dependent charts and resources.
+
+- Trigger notifications to external systems when certain events occur.
+
+Hooks are defined using annotations in Kubernetes manifests within a Helm chart. Helm will execute the hooks based on the release action happening.
+
+This enables inserting automation, orchestration and notification logic around chart installation, upgrades, rollbacks etc. Hooks help extend Helm's capabilities to support complex deployment workflows.
+
+So in summary, Helm hooks allow easily inserting automation and orchestration logic around release lifecycle events. This unlocks new possibilities for chart authors.
+
 # Introduction 
 
 In this demo we will start with multi tear web app, and see how we can use Helm Hook to manipulate/update setup after its deployed 
 
-- Deploy voter app and all it's depdenent micro services 
+- Deploy voter app and all it's dependent micro services 
 - Update Voter app to use Persistent volume 
 - Use init container to move stuff from Docker Image to persistent stuff
 - Use Helm Post install/upgrade Hook to update content of application 
