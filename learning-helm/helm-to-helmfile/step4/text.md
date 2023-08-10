@@ -178,7 +178,7 @@ vote                           	default  	1       	2023-08-03 18:49:57.765825687
 
 But you can see all the pods are running so that shows that all charts got installed 
 
-`kubectl get pods`{{exec}}
+`kubectl get pods,svc`{{exec}}
 
 Sample output 
 
