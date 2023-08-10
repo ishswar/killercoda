@@ -182,8 +182,9 @@ db       db         0.1.0
 
 After above deployment is succeeds you can check the nodePort used by `vote` chart - you can see it is using default value of `31004` - this value is defined in `chart/values.yaml` file 
 
+`kubectl get svc -l app=vote`{{exec}}
+
 ```shell script
-kubectl get svc -l app=vote
 NAME   TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
 vote   NodePort   10.104.56.191   <none>        5000:31004/TCP   59m
 ```
@@ -213,8 +214,9 @@ releases:
 
 If you update the value of `helmfile.yaml` with above value and run `helmfile sync`{{exec}} you will see the nodePort for `vote` service will be now using port `31009`
 
+`kubectl get svc -l app=vote`{{exec}}
+
 ```shell script 
-kubectl get svc -l app=vote
 NAME   TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
 vote   NodePort   10.104.56.191   <none>        5000:31009/TCP   71m
 ```
@@ -301,8 +303,10 @@ Now if you want to switch to using `Development` environment value we can run sa
 The the word `dev` comes from `helmfile.yaml` as there is additional environment is defined called `dev` and it gets values from `env.gotempl`
 If you look at file `env.gotmpl` the value of vote.service.nodeport is defined to be value of 31007 and after above command succeeds if you check the nodePort of vote service it will have value of 31007 - see below 
 
+`kubectl get svc -l app=vote`{{exec}}
+
+
 ```
-kubectl get svc -l app=vote
 NAME   TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
 vote   NodePort   10.104.56.191   <none>        5000:31007/TCP   88m
 ```
