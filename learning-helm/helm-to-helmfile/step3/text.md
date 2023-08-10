@@ -24,11 +24,11 @@ Checkout the `with-helm-values` branch:
 
 You can use command 
 
-`git checkout with-helm-values`{{exec}} 
+`git checkout -f with-helm-values`{{exec}} 
 
 If you go to file `k8s-specifications/vote/templates/vote-service.yaml` 
 
-you will two changes 
+you will see two changes 
 
 ![](https://i.ibb.co/kDz5ZVZ/image.png)
 
@@ -69,6 +69,8 @@ service:
 You can see value.yaml also defines few more value like `debug` that is used by file `k8s-specifications/vote/templates/vote-deployment.yaml`
 That means any helm chart yaml can use value from value.yaml using same format `.Values.<path-to-value>`
 
+<img src="https://www.goodfreephotos.com/albums/vector-images/info-symbol-vector-graphics.png" alt="Girl in a jacket" width="30" height="30"> If you remember originally vote application was exposed on `31000` but now since in values.yaml it is changed to `31004` after we deploy we need to update our URL that we use to access Vote application 
+
 Now lets deploy all charts just like before 
 
 ```plain 
@@ -89,6 +91,9 @@ Sample output
 NAME   TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
 vote   NodePort   10.110.168.80   <none>        5000:31004/TCP   52s
 ```
+
+Now you can try to access the same URLs as before to access the 
+[ACCESS VOTE APP]({{TRAFFIC_HOST1_31004}})
 
 We can confirm it is indeed using that value.
 

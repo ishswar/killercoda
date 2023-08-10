@@ -105,6 +105,9 @@ worker  default         1               2023-02-22 04:10:35.724799692 +0000 UTC 
 ```
 
 The above shows all 5 charts are installed.   
+
+We can also check using command `kubectl get pods && kubectl get svc`{{exec}} that all PODs and Services are back 
+
 Now you can try to access the same URLs as before to access the 
 [ACCESS VOTE APP]({{TRAFFIC_HOST1_31000}})
 application and 
