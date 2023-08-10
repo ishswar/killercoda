@@ -212,7 +212,7 @@ If you want you can play with this - you can uncomment values in `vote/values.ya
 
 Remove all charts and apps using this command 
 
-`helm uninstall db redis worker result vote `{{exec}} 
+`helm uninstall vote `{{exec}} 
 
 # Summary of this step 
 
