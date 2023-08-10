@@ -44,7 +44,7 @@ kubectl delete job vote-post-task
 helm install vote ./vote
 ```{{exec}}
 
-Now if you try to get PODS 
+Now if you try to get all PODS 
 
 `kubectl get pods`{{exec}}
 
