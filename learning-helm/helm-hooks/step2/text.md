@@ -11,7 +11,7 @@ For this step you can check out branch `with-helm-hook`
 
 In this repo folder `vote/templates` has been updated
 
-`cd ~/example-voting-app/k8s-specifications && tree vote/templates/`
+`cd ~/example-voting-app/k8s-specifications && tree vote/templates/`{{exec}}
 
 ```
 vote/templates/

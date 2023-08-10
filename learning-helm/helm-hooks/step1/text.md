@@ -47,7 +47,7 @@ The above shows all 5 charts are installed.
 
 You can also check on what port voting app is running 
 
-`kubectl get -l app=vote`{{exec}}
+`kubectl get all -l app=vote`{{exec}}
 
 Now you can try to access the same URLs as before to access the 
 [ACCESS VOTE APP]({{TRAFFIC_HOST1_31000}})
