@@ -77,6 +77,7 @@ You can also run a command `helmfile list` on helmfile to see what all chart wil
 ```
 cd ~/example-voting-app/k8s-specifications
 helmfile list
+git clean -fd
 ```{{exec}}
 
 Sample output : 
