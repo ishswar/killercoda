@@ -13,12 +13,16 @@
 
       },
       {
-        "title": "Need for Post install/upgrade task",
+        "title": "Why/How to add Post install/upgrade task using Helm hook",
         "text": "step2/text.md"
       },
       {
-        "title": "Adding Post install/upgrade Hook",
+        "title": "More about Helm Hook",
         "text": "step3/text.md"
+      },
+      {
+        "title": "Advance use-case : Mounting post install script to POD",
+        "text": "step4/text.md"
       }
     ],
     "finish": {
