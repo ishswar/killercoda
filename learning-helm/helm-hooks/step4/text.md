@@ -1,4 +1,4 @@
-What if you don't want to hard code the script into POD
+What if you don't want to hardcode the script into POD
 
 <br>
 
