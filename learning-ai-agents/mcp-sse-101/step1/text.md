@@ -19,12 +19,10 @@ Check-out branch using command `cd ~/example-voting-app && git checkout with-hel
 ## Install using Helm charts 
 
 ```shell
-cd ~/example-voting-app/k8s-specifications
-helm install db ./db 
-helm install redis ./redis
-helm install worker ./worker
-helm install result ./result
-helm install vote ./vote
+exec bash -l
+cd /root/mcp-demos/mcp_sse_101
+pip install -U "mcp[cli]"
+python story_server.py 
 ```{{exec}}
 
 
