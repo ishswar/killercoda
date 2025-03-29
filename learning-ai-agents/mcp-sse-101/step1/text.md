@@ -1,7 +1,6 @@
 
-Create Helm charts and use them to Deploy voting  applications
+Install MCP CLI and start Story server (MCP Server) using Python
 
-<br>
 
 # Clone sample repo
 
@@ -11,12 +10,19 @@ Clone MCP github repo :
 
 All the code is in this repo
 
-# Deploy using Helm 
+# Introduction to MCP 
 
-We will use Helm charts to Deploy Voting application
-Check-out branch using command `cd ~/example-voting-app && git checkout with-helm`{{exec}} this branch has all the charts for deploying all needed microservices.
+The Model Context Protocol (MCP) is an open standard designed to facilitate seamless integration between AI applications and external data sources or tools. It enables AI models to dynamically access relevant context, enhancing their performance and versatility. citeturn0search3
 
-## Install python MCP Module
+MCP supports various communication transports, including:
+
+- **Standard Input/Output (Stdio):** Ideal for local integrations, utilizing standard input and output streams for communication.
+
+- **Server-Sent Events (SSE):** Suited for remote interactions, allowing servers to push real-time updates to clients over HTTP. citeturn0search2
+
+In this tutorial, we'll focus on the "storytelling server" sample provided in the GitHub repository, which employs SSE for communication. This approach ensures that the MCP server is accessible to clients globally, facilitating real-time data streaming. Let's begin by installing and configuring this server. 
+
+## Install python MCP Python Module
 
 ```shell
 exec bash -l
