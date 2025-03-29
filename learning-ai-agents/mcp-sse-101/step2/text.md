@@ -5,9 +5,15 @@
 
 ⚠️ <span style="color:red">Run following commands in new Tab</span>
 
+<details>
+<summary>Read more</summary>
 ![New Tab](https://i.ibb.co/b59kdLmy/new-tab.gif)
 
+</details>
+
 ### Ping Server
+
+Run below command to start a simple ping server
 
 ```
 cd /root/mcp-demos/mcp_sse_101
@@ -17,6 +23,8 @@ python mcp_client_ping.py \
 
 ## Start Intractive MCP Client 
 
+Now, let's start the MCP client to interact with the story server.
+
 ```
 cd /root/mcp-demos/mcp_sse_101
 python mcp_client.py \
@@ -25,4 +33,8 @@ python mcp_client.py \
 
 ### Sample Output
 
+<details>
+<summary>Click to see output</summary>
 ![MCP Client](https://i.ibb.co/4RGPGzLT/mcp-client.gif)
+
+</details>
