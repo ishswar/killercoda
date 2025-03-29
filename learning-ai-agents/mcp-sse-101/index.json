@@ -1,0 +1,35 @@
+{
+  "title": "Helm Hook intro",
+  "description": "How to use Helm Hook to do certain task post install or post upgrade",
+  "details": {
+    "intro": {
+      "text": "intro.md",
+      "background": "setup.sh"
+    },
+    "steps": [
+      {
+        "title": "Deploy application using Helm chart",
+        "text": "step1/text.md"
+
+      },
+      {
+        "title": "Why/How to add Post install/upgrade task using Helm hook",
+        "text": "step2/text.md"
+      },
+      {
+        "title": "More about Helm Hook",
+        "text": "step3/text.md"
+      },
+      {
+        "title": "Advance use-case : Mounting post install script to POD",
+        "text": "step4/text.md"
+      }
+    ],
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "backend": {
+    "imageid": "kubernetes-kubeadm-1node"
+  }
+}
