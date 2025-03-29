@@ -9,9 +9,8 @@
     },
     "steps": [
       {
-        "title": "Simple MCP Server",
+        "title": "Simple Story-builder MCP Server",
         "text": "step1/text.md"
-
       }
     ],
     "finish": {

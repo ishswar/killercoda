@@ -40,4 +40,4 @@ python story_server.py
 # mcp run story_server.py  
 ```{{exec}}
 
-Now we can access the MCP Story server at [MCP Story Server]({{HOST1_8080}})
+Now we can access the MCP Story server at [MCP Story Server]({{TRAFFIC_HOST1_8080}})
