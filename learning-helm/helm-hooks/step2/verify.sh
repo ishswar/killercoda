@@ -1,3 +1,3 @@
 #!/bin/bash
 
-cat /etc/my-second-file | grep amazing
+# cat /etc/my-second-file | grep amazing

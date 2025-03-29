@@ -11,6 +11,10 @@
       {
         "title": "Simple Story-builder MCP Server",
         "text": "step1/text.md"
+      },
+      {
+        "title": "Test the MCP Server",
+        "text": "step2/text.md"
       }
     ],
     "finish": {

@@ -36,7 +36,7 @@ pip install -U "mcp[cli]"
 cd /root/mcp-demos/mcp_sse_101
 # Start story server
 python story_server.py
-# we can start uisng this command too
+# we can start using this command too
 # mcp run story_server.py  
 ```{{exec}}
 
@@ -45,7 +45,6 @@ python story_server.py
 Once you run above server you should see below output 
 
 ```shell
-(mcp_env) ubuntu $ python story_server.py
 MCP Story Server is running using SSE transport ...
 INFO:     Started server process [2996]
 INFO:     Waiting for application startup.
@@ -55,7 +54,7 @@ INFO:     Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
 
 Now we can access the MCP Story server at [MCP Story Server]({{TRAFFIC_HOST1_8080}}/sse)
 
-Right click on above link and copy URL as you will need this in next steps.
+**Right click on above link and copy URL as you will need this in next steps.**
 
 ## Optional 
 
