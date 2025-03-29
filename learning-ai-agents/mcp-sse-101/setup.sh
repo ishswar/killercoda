@@ -30,7 +30,7 @@ if conda info --envs | grep -q "^mcp_env "; then
 else
     echo "Creating Conda environment 'mcp_env' with Python 3.10..."
     # Create the mcp_env environment with Python 3.10
-    conda create -y -n mcp_env python=3.10
+    conda create -y -n mcp_env python=3.11
 fi
 
 # Activate the mcp_env environment

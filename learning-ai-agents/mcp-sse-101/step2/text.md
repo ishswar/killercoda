@@ -6,14 +6,16 @@
 ⚠️ <span style="color:red">Run following commands in new Tab</span>
 
 <details>
-<summary>Read more</summary>
+<summary>Steps to Open new Tab</summary>
+
 ![New Tab](https://i.ibb.co/b59kdLmy/new-tab.gif)
 
 </details>
 
+  
 ### Ping Server
 
-Run below command to start a simple ping server
+Run below command (⚠️ in new tab) to start a simple ping server
 
 ```
 cd /root/mcp-demos/mcp_sse_101
@@ -37,7 +39,5 @@ python mcp_client.py \
 <summary>Click to see output</summary>
 
 ![MCP Client](https://i.ibb.co/4RGPGzLT/mcp-client.gif)
-
-<p><img src="https://i.ibb.co/4RGPGzLT/mcp-client.gif" alt="MCP Client"></p>
 
 </details>
