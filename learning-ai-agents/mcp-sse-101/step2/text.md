@@ -35,6 +35,9 @@ python mcp_client.py \
 
 <details>
 <summary>Click to see output</summary>
+
 ![MCP Client](https://i.ibb.co/4RGPGzLT/mcp-client.gif)
+
+<p><img src="https://i.ibb.co/4RGPGzLT/mcp-client.gif" alt="MCP Client"></p>
 
 </details>
