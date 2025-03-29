@@ -22,3 +22,7 @@ cd /root/mcp-demos/mcp_sse_101
 python mcp_client.py \
 --url {{TRAFFIC_HOST1_8080}}/sse
 ```{{exec}}
+
+### Sample Output
+
+![MCP Client](https://i.ibb.co/4RGPGzLT/mcp-client.gif)
