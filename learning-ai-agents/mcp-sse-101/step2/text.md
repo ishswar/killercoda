@@ -1,7 +1,14 @@
 
-# Test MCP Story Server 
+# Test MCP story-server 
+
+In this step will walk you through testing the MCP Story Server.  
+You'll start by launching a lightweight ping server and then run the interactive MCP client to explore tools and prompts.
+
+---
 
 ## Start a simple ping server first
+
+Before launching the main client, we’ll start a **simple ping server** in a new terminal tab to simulate server-side activity.
 
 ⚠️ <span style="color:red">Run following commands in new Tab</span>
 
@@ -12,7 +19,7 @@
 
 </details>
 
-  
+<br>
 ### Ping Server
 
 Run below command (⚠️ in new tab) to start a simple ping server
