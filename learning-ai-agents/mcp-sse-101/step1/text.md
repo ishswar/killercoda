@@ -7,7 +7,7 @@ Create Helm charts and use them to Deploy voting  applications
 
 Clone my github repo :
 
-`cd ~ && git clone https://github.com/ishswar/example-voting-app.git`{{exec}}
+`cd ~ && git clone https://github.com/ishswar/mcp-demos.git`{{exec}}
 
 All the code is in this repo
 

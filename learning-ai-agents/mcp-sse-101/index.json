@@ -1,28 +1,17 @@
 {
-  "title": "Helm Hook intro",
-  "description": "How to use Helm Hook to do certain task post install or post upgrade",
+  "title": "MCP intro",
+  "description": "In this demo we will see how to write a simple MCP Server",
   "details": {
     "intro": {
       "text": "intro.md",
-      "background": "setup.sh"
+      "background": "setup.sh",
+      "foreground": "foreground.sh"
     },
     "steps": [
       {
-        "title": "Deploy application using Helm chart",
+        "title": "Simple MCP Server",
         "text": "step1/text.md"
 
-      },
-      {
-        "title": "Why/How to add Post install/upgrade task using Helm hook",
-        "text": "step2/text.md"
-      },
-      {
-        "title": "More about Helm Hook",
-        "text": "step3/text.md"
-      },
-      {
-        "title": "Advance use-case : Mounting post install script to POD",
-        "text": "step4/text.md"
       }
     ],
     "finish": {
@@ -30,6 +19,6 @@
     }
   },
   "backend": {
-    "imageid": "kubernetes-kubeadm-1node"
+    "imageid": "ubuntu"
   }
 }

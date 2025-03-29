@@ -1,7 +1,5 @@
 #!/bin/bash
 
-touch /var/dont-need-this.png
-
 apt-get install tree -y
 
 # Define Miniconda installation directory
@@ -42,3 +40,5 @@ conda activate mcp_env
 echo "conda activate mcp_env" >> ~/.bashrc
 
 echo "Setup complete. The 'mcp_env' environment will be activated by default in new shell sessions."
+
+touch /tmp/background0
