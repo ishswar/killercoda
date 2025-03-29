@@ -12,7 +12,7 @@
 ```
 cd /root/mcp-demos/mcp_sse_101
 python mcp_client_ping.py \
--url {{TRAFFIC_HOST1_8080}}/sse
+--url {{TRAFFIC_HOST1_8080}}/sse
 ```{{exec}}
 
 ## Start Intractive MCP Client 
@@ -20,5 +20,5 @@ python mcp_client_ping.py \
 ```
 cd /root/mcp-demos/mcp_sse_101
 python mcp_client.py \
--url {{TRAFFIC_HOST1_8080}}/sse
+--url {{TRAFFIC_HOST1_8080}}/sse
 ```{{exec}}
