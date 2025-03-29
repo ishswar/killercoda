@@ -5,6 +5,10 @@
 
 ⚠️ <span style="color:red">Run following commands in new Tab</span>
 
+![New Tab](https://i.ibb.co/b59kdLmy/new-tab.gif)
+
+### Ping Server
+
 ```
 cd /root/mcp-demos/mcp_sse_101
 python mcp_client_ping.py \
