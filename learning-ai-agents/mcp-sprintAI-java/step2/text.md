@@ -19,16 +19,6 @@ Before launching the main client, we’ll start a **simple ping server** in a ne
 
 </details>
 
-<br>
-### Ping Server
-
-Run below command (⚠️ in new tab) to start a simple ping server
-
-```
-cd /root/mcp-demos/mcp_sse_101
-python mcp_client_ping.py \
---url {{TRAFFIC_HOST1_8081}}/sse
-```{{exec}}
 
 ## Start Intractive MCP Client 
 

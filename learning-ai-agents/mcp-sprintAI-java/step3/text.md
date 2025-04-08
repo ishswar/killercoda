@@ -12,7 +12,7 @@
 4. **Enter Server Details**  
    Fill in the required fields:
    - **Name**: Any name you want to give your server (e.g., `My Java SSE Server`)
-   - **Endpoint URL**: Paste the public URL where your Spring AI MCP SSE server is running (e.g., `{{TRAFFIC_HOST1_8081}}/mcp` or your tunnel/exposed URL if using `ngrok` or `localhost.run`)
+   - **Endpoint URL**: Paste the public URL where your Spring AI MCP SSE server is running (e.g., `{{TRAFFIC_HOST1_8081}}/sse` or your tunnel/exposed URL if using `ngrok` or `localhost.run`)
    - Optionally add tags or notes if the UI supports it.
 
 5. **Click “Save” or “Add”**  
