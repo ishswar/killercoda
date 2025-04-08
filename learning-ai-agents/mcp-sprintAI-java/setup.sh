@@ -39,7 +39,7 @@ pip install -U "mcp[cli]"
 # Install Java 24
 echo "Installing Java 24..."
 wget https://download.oracle.com/java/24/latest/jdk-24_linux-x64_bin.deb -O /tmp/jdk-24.deb
-apt-get install -y ./tmp/jdk-24.deb
+apt-get install -y /tmp/jdk-24.deb
 
 # Set JAVA_HOME (optional but useful)
 echo 'export JAVA_HOME=/usr/lib/jvm/jdk-24' >> ~/.bashrc
