@@ -29,14 +29,14 @@ In this GitHub repository, the provided sample called the "storytelling server" 
 cd /root/mcp-demos/mcp_java
 # Maven clean and install
 mvn clean install
-
 ```{{exec}}
 
 ## Start the server
+
 ```shell
 # Start Java MCP Server
 java -jar target/story-builder-server-0.0.1-SNAPSHOT.jar
-```{{exec}
+```{{exec}}
 
 ### Sample output 
 

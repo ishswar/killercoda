@@ -27,7 +27,7 @@ Run below command (⚠️ in new tab) to start a simple ping server
 ```
 cd /root/mcp-demos/mcp_sse_101
 python mcp_client_ping.py \
---url {{TRAFFIC_HOST1_8080}}/sse
+--url {{TRAFFIC_HOST1_8081}}/sse
 ```{{exec}}
 
 ## Start Intractive MCP Client 
@@ -37,7 +37,7 @@ Now, let's start the MCP client to interact with the story server.
 ```
 cd /root/mcp-demos/mcp_sse_101
 python mcp_client.py \
---url {{TRAFFIC_HOST1_8080}}/sse
+--url {{TRAFFIC_HOST1_8081}}/sse
 ```{{exec}}
 
 ### Sample Output
