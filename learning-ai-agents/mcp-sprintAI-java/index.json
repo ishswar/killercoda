@@ -1,6 +1,6 @@
 {
-  "title": "MCP intro (Java Server)",
-  "description": "In this demo we will see how to write a simple Java MCP Server",
+  "title": "MCP intro (SpringAI Java Server)",
+  "description": "In this demo we will see how to write a simple Java MCP Server using SpringAi",
   "details": {
     "intro": {
       "text": "intro.md",
