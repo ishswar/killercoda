@@ -1,69 +1,42 @@
-Go over Hook definition and talk about Cleanup 
+### 🛠️ Steps to Register an MCP SSE Server
 
-<br>
+1. **Go to the Site**  
+   Open [https://open-mcp-client.vercel.app/](https://open-mcp-client.vercel.app/) in your browser.
 
-# How does hook looks like 
+2. **Click on “+ Add Server”**  
+   On the top right of the dashboard, click the **“+ Add Server”** button.
 
-As shown below [Helm Hook](https://helm.sh/docs/topics/charts_hooks/) is basically a definition of Kubernetes job - it creates a POD and waits for it to succeed. 
-If POD fails it will _retry_ few times until it succeeds.
+3. **Select Server Type**  
+   In the popup, choose the server type as **“SSE Server”** (if it gives you options between Studio, SSE, etc.).
 
-![](https://i.ibb.co/9w1dB4q/image.png)
+4. **Enter Server Details**  
+   Fill in the required fields:
+   - **Name**: Any name you want to give your server (e.g., `My Java SSE Server`)
+   - **Endpoint URL**: Paste the public URL where your Spring AI MCP SSE server is running (e.g., `{{TRAFFIC_HOST1_8081}}/mcp` or your tunnel/exposed URL if using `ngrok` or `localhost.run`)
+   - Optionally add tags or notes if the UI supports it.
 
-## Cleanup after Hook succeeds
+5. **Click “Save” or “Add”**  
+   After filling in the info, confirm by clicking **“Save”** or **“Add”**.
 
-As of now if you list pods - you will see that there is POD named `vote-post-task-<id>` ; and it's in `Completed` state
-This is the POD that did work of copying content from Image to PVC. Ideally we don't want this job to linger after its work is done. 
+6. **Verify Server Registration**  
+   - Your server will now appear in the **Server List** under “SSE Servers”.
+   - You should see metrics like tool count or endpoint status populate if the server is up.
 
-`kubectl get pods`{{exec}}
+7. **Test the Tools**  
+   Once the server is connected, use the **chat or prompt interface on the right** (as seen in the GIF) to issue a prompt like:  
+   ```
+   Using tools, build a story about the Three Musketeers
+   ```
 
-```
-NAME                      READY   STATUS      RESTARTS   AGE
-db-7fc468458-rvdgr        1/1     Running     0          114s
-redis-66949686f7-ctbtc    1/1     Running     0          113s
-result-6b9bc65689-zpxhj   1/1     Running     0          111s
-vote-564c8dcf4-8qr75      1/1     Running     0          47s
-vote-post-task-tb858      0/1     Completed   0          13s
-worker-6fc5d5b668-8d8w2   1/1     Running     0          112s
-```
+---
 
-In order to get that behavior you need to add one more annotation to Hook definition and that is `"helm.sh/hook-delete-policy": hook-succeeded`; this will tell Hook to delete this JOB/POD after it finishes with exit code 0.
+### ✅ Tips
 
-### Update hook to do cleanup 
+- If your server is local, use a tunneling service like [`ngrok`](https://ngrok.com/), [`localhost.run`](https://localhost.run), or [`cloudflared`](https://developers.cloudflare.com/cloudflared/) to expose it.
+- Make sure your SSE server endpoint returns valid MCP-compliant metadata when queried by the client.
 
-We already have above annotation part of our Helm Hook Job definition but it is commented out 
-Lets uncomment that 
+### Demo 
 
-`sed -i 's|# "helm.sh/hook-delete-policy"|"helm.sh/hook-delete-policy"|g' ~/example-voting-app/k8s-specifications/vote/templates/vote-hook.yaml`{{exec}}
+Below animated gif shows you above steps 
 
-Now let's uninstall old chart and apply new chart 
-
-```shell
-cd ~/example-voting-app/k8s-specifications 
-helm uninstall vote
-kubectl delete job vote-post-task
-helm install vote ./vote
-```{{exec}}
-
-Now if you try to get all PODS 
-
-`kubectl get pods`{{exec}}
-
-You will see POD for Helm hook is gone 
-
-```
-NAME                      READY   STATUS    RESTARTS   AGE
-db-7fc468458-pwh7n        1/1     Running   0          9m40s
-redis-66949686f7-ws4z2    1/1     Running   0          9m39s
-result-6b9bc65689-vl4mg   1/1     Running   0          9m37s
-vote-564c8dcf4-4k7x2      1/1     Running   0          20s
-worker-6fc5d5b668-z5cck   1/1     Running   0          9m38s
-```
-
-## Preserving the logs 
-
-One issue we see with setting flag `"helm.sh/hook-delete-policy": hook-succeeded` is that POD gets deleted and with it all log of that Job is gone. 
-One of the solution is we used here is to write the output of shell script to file that is in PVC so in future we can review that for any query we have about Hook's work.
-
-You can see that lot file using below command 
-
-`kubectl exec -i deployments/vote -c vote -- cat post-hook-output.txt`{{exec}}
+![MCP Client](https://i.ibb.co/GQFMBVzV/2025-04-08-08-23-34-1.gif)
