@@ -26,7 +26,7 @@ In this GitHub repository, the provided sample called the "storytelling server" 
 
 ```shell
 # cd in to story server directory
-cd /root/mcp-demos/mcp-server-story
+cd /root/mcp-demos/mcp_pure_java/mcp-server-story
 # Maven clean and install
 mvn clean install
 ```{{exec}}
@@ -35,7 +35,7 @@ mvn clean install
 
 ```shell
 # Start Java MCP Server
-java -jar java -jar target/mcp-server-story.jar
+java -jar target/mcp-server-story.jar
 ```{{exec}}
 
 ### Sample output 

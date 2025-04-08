@@ -1,6 +1,6 @@
 ## Introduction
 
-Welcome to this Killercoda scenario on building and running a **pure Java MCP Server** using the [Model Context Protocol (MCP) Java SDK](https://modelcontextprotocol.io/sdk/java/mcp-overview). This server functions as a **Book MCP Server**, providing a rich storytelling experience with a collection of **characters, backstories, and superpowers**.
+Welcome to this Killercoda scenario on building and running a **pure Java MCP Server** using the [Model Context Protocol (MCP) Java SDK](https://modelcontextprotocol.io/sdk/java/mcp-overview). This server functions as a **Story Book Builder MCP Server**, providing a rich storytelling experience with a collection of **characters, backstories, and superpowers**.
 
 In this tutorial, we will:
 - **Build and compile** a Java application that serves as the MCP server.
