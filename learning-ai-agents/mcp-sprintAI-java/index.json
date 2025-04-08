@@ -1,0 +1,27 @@
+{
+  "title": "MCP intro (Java Server)",
+  "description": "In this demo we will see how to write a simple Java MCP Server",
+  "details": {
+    "intro": {
+      "text": "intro.md",
+      "background": "setup.sh",
+      "foreground": "foreground.sh"
+    },
+    "steps": [
+      {
+        "title": "Simple Story-builder SpringAI (java) MCP Server",
+        "text": "step1/text.md"
+      },
+      {
+        "title": "Test the MCP Server",
+        "text": "step2/text.md"
+      }
+    ],
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "backend": {
+    "imageid": "ubuntu"
+  }
+}
